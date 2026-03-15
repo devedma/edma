@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EDMA Design System v3</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ═══ LIGHT THEME — edma.co brand ═══ */
+:root, [data-theme="light"] {
+  /* Brand */
+  --e-navy: #050443;
+  --e-navy-80: #1E1D5C;
+  --e-navy-60: #3A3978;
+  --e-navy-40: #6968A1;
+  --e-navy-20: #B4B3D0;
+  --e-navy-10: #D9D9E7;
+  --e-navy-05: #EDEDF4;
+  --e-amber: #F5A410;
+  --e-amber-hover: #E09309;
+  --e-amber-soft: #FEF4E1;
+  --e-amber-text: #8B5A00;
+
+  /* Surfaces */
+  --e-bg: #FFFFFF;
+  --e-bg-page: #F6F6FA;
+  --e-surface: #FFFFFF;
+  --e-surface-raised: #FFFFFF;
+  --e-surface-sunken: #F0F0F6;
+
+  /* Borders */
+  --e-border: #E2E2EC;
+  --e-border-strong: #CDCDD9;
+
+  /* Text */
+  --e-text: #050443;
+  --e-text-secondary: #3A3978;
+  --e-text-muted: #8887AD;
+
+  /* Semantic */
+  --e-success: #10B981;
+  --e-success-soft: #E8FAF3;
+  --e-success-text: #065F46;
+  --e-danger: #EF4444;
+  --e-danger-soft: #FEF2F2;
+  --e-danger-text: #991B1B;
+  --e-info: #3B82F6;
+  --e-info-soft: #EFF6FF;
+  --e-info-text: #1E40AF;
+  --e-warning: #F59E0B;
+  --e-warning-soft: #FFFBEB;
+  --e-warning-text: #92400E;
+
+  /* Inputs */
+  --e-input-bg: #FFFFFF;
+  --e-input-border: #CDCDD9;
+  --e-input-border-focus: #050443;
+  --e-input-placeholder: #8887AD;
+
+  /* Effects */
+  --e-card-shadow: 0 1px 3px rgba(5,4,67,0.06), 0 1px 2px rgba(5,4,67,0.03);
+  --e-card-shadow-hover: 0 4px 16px rgba(5,4,67,0.1);
+  --e-focus-ring: 0 0 0 3px rgba(5,4,67,0.12);
+
+  color-scheme: light;
+}
+
+/* ═══ DARK THEME ═══ */
+[data-theme="dark"] {
+  --e-navy: #C8C7E0;
+  --e-navy-80: #9F9EC5;
+  --e-navy-60: #7574A8;
+  --e-navy-40: #4E4D8A;
+  --e-navy-20: #2A295E;
+  --e-navy-10: #1A1948;
+  --e-navy-05: #0F0E35;
+  --e-amber: #F5B840;
+  --e-amber-hover: #F5C868;
+  --e-amber-soft: rgba(245,164,16,0.14);
+  --e-amber-text: #F5D078;
+
+  --e-bg: #0A0930;
+  --e-bg-page: #060524;
+  --e-surface: #100F3A;
+  --e-surface-raised: #161548;
+  --e-surface-sunken: #0A0930;
+
+  --e-border: #1E1D5C;
+  --e-border-strong: #2A295E;
+
+  --e-text: #EEEDF8;
+  --e-text-secondary: #B4B3D0;
+  --e-text-muted: #6968A1;
+
+  --e-success: #34D399;
+  --e-success-soft: rgba(52,211,153,0.12);
+  --e-success-text: #6EE7B7;
+  --e-danger: #F87171;
+  --e-danger-soft: rgba(248,113,113,0.12);
+  --e-danger-text: #FCA5A5;
+  --e-info: #60A5FA;
+  --e-info-soft: rgba(96,165,250,0.12);
+  --e-info-text: #93C5FD;
+  --e-warning: #FBBF24;
+  --e-warning-soft: rgba(251,191,36,0.12);
+  --e-warning-text: #FDE68A;
+
+  --e-input-bg: #0A0930;
+  --e-input-border: #2A295E;
+  --e-input-border-focus: #F5B840;
+  --e-input-placeholder: #4E4D8A;
+
+  --e-card-shadow: 0 1px 4px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.03);
+  --e-card-shadow-hover: 0 6px 20px rgba(0,0,0,0.5);
+  --e-focus-ring: 0 0 0 3px rgba(245,184,64,0.25);
+
+  color-scheme: dark;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  background: var(--e-bg-page);
+  color: var(--e-text);
+  transition: background 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: 980px; margin: 0 auto; padding: 40px 32px; }
+
+/* ─── Header ─── */
+.hdr {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 40px; padding: 20px 28px;
+  background: var(--e-surface); border: 1px solid var(--e-border);
+  border-radius: 16px; box-shadow: var(--e-card-shadow);
+}
+.hdr-left { display: flex; align-items: center; gap: 14px; }
+.logo {
+  width: 42px; height: 42px; border-radius: 11px;
+  background: #050443; display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 19px; color: #F5A410; font-family: 'Inter', sans-serif;
+}
+[data-theme="dark"] .logo { background: #F5A410; color: #050443; }
+.hdr h1 { font-size: 22px; font-weight: 800; letter-spacing: -0.3px; }
+.hdr h1 span { font-weight: 400; color: var(--e-text-muted); font-size: 14px; margin-left: 10px; }
+
+/* ─── Theme Toggle ─── */
+.tog { display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px; font-weight: 500; color: var(--e-text-secondary); user-select: none; }
+.tog-track { width: 52px; height: 28px; border-radius: 14px; background: var(--e-border-strong); position: relative; transition: background 0.3s; }
+[data-theme="dark"] .tog-track { background: var(--e-amber); }
+.tog-knob { width: 22px; height: 22px; border-radius: 50%; background: #fff; position: absolute; top: 3px; left: 3px; transition: transform 0.3s; box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
+[data-theme="dark"] .tog-knob { transform: translateX(24px); }
+.tog-label { transition: opacity 0.2s; }
+[data-theme="light"] .tog-label:last-child { opacity: 0.4; }
+[data-theme="dark"] .tog-label:first-of-type { opacity: 0.4; }
+
+/* ─── Section Headers ─── */
+.sec { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--e-text-muted); margin: 40px 0 16px; }
+.sep { height: 1px; background: var(--e-border); margin: 40px 0; }
+
+/* ─── Swatches ─── */
+.swatch-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+.swatch {
+  flex: 1; min-width: 72px; height: 64px; border-radius: 12px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 600; border: 1px solid var(--e-border); transition: transform 0.15s;
+}
+.swatch:hover { transform: scale(1.04); }
+.swatch-hex { opacity: 0.6; font-size: 11px; font-weight: 500; margin-top: 3px; }
+
+/* ─── Typography ─── */
+.type-sample { margin-bottom: 20px; }
+.type-sample .spec { color: var(--e-text-muted); font-size: 12px; margin-top: 4px; background: var(--e-surface-sunken); display: inline-block; padding: 3px 10px; border-radius: 6px; }
+
+/* ─── Card ─── */
+.card {
+  background: var(--e-surface); border: 1px solid var(--e-border);
+  border-radius: 14px; padding: 20px 24px; box-shadow: var(--e-card-shadow);
+  transition: box-shadow 0.2s;
+}
+
+/* ─── Metrics ─── */
+.metric {
+  background: var(--e-surface-sunken); border: 1px solid var(--e-border);
+  border-radius: 12px; padding: 18px 20px; flex: 1; min-width: 140px;
+}
+.metric-label { font-size: 12px; color: var(--e-text-muted); margin-bottom: 6px; font-weight: 500; }
+.metric-val { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; line-height: 1.2; }
+.metric-sub { font-size: 13px; color: var(--e-success); margin-top: 4px; font-weight: 500; }
+
+/* ─── Buttons ─── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 10px 22px; border-radius: 10px; font-size: 14px; font-weight: 600;
+  border: none; cursor: pointer; transition: all 0.15s; font-family: 'Inter', sans-serif; line-height: 1.4;
+}
+.btn:active { transform: scale(0.97); }
+.btn-primary { background: #F5A410; color: #050443; }
+.btn-primary:hover { background: #E09309; }
+[data-theme="dark"] .btn-primary { background: #F5B840; color: #050443; }
+[data-theme="dark"] .btn-primary:hover { background: #F5C868; }
+.btn-secondary { background: #050443; color: #FFFFFF; }
+.btn-secondary:hover { background: #1E1D5C; }
+[data-theme="dark"] .btn-secondary { background: #EEEDF8; color: #050443; }
+[data-theme="dark"] .btn-secondary:hover { background: #D9D9E7; }
+.btn-outline { background: transparent; border: 1.5px solid var(--e-border-strong); color: var(--e-text); }
+.btn-outline:hover { background: var(--e-surface-sunken); border-color: var(--e-text-muted); }
+.btn-ghost { background: transparent; color: var(--e-text-secondary); }
+.btn-ghost:hover { background: var(--e-surface-sunken); }
+.btn-danger { background: var(--e-danger-soft); color: var(--e-danger-text); }
+.btn-danger:hover { opacity: 0.85; }
+.btn-sm { font-size: 13px; padding: 7px 16px; border-radius: 8px; }
+
+/* ─── Badges ─── */
+.badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; line-height: 1.4;
+}
+.badge-pass { background: var(--e-success-soft); color: var(--e-success-text); }
+.badge-fail { background: var(--e-danger-soft); color: var(--e-danger-text); }
+.badge-pending { background: var(--e-amber-soft); color: var(--e-amber-text); }
+.badge-info { background: var(--e-info-soft); color: var(--e-info-text); }
+.dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+.dot-live { background: var(--e-success); }
+.dot-off { background: var(--e-danger); }
+.dot-pending { background: var(--e-amber); }
+.addr {
+  font-size: 13px; font-weight: 500; color: var(--e-text-secondary);
+  background: var(--e-surface-sunken); padding: 4px 12px; border-radius: 8px;
+  border: 1px solid var(--e-border); display: inline-block;
+}
+
+/* ─── Navigation — Tab bar ─── */
+.nav {
+  display: flex; gap: 2px; background: var(--e-surface-sunken);
+  border: 1px solid var(--e-border); border-radius: 12px; padding: 4px;
+}
+.nav-item {
+  padding: 9px 20px; border-radius: 9px; font-size: 14px; font-weight: 500;
+  color: var(--e-text-muted); cursor: pointer; transition: all 0.15s;
+}
+.nav-item:hover { color: var(--e-text); }
+.nav-item.active {
+  background: var(--e-surface-raised); color: var(--e-text);
+  box-shadow: var(--e-card-shadow); border: 1px solid var(--e-border);
+  font-weight: 600;
+}
+
+/* ─── Navigation — Sidebar ─── */
+.sidebar-nav { list-style: none; }
+.sidebar-nav li {
+  padding: 11px 16px; border-radius: 10px; font-size: 14px; font-weight: 500;
+  color: var(--e-text-secondary); cursor: pointer; display: flex; align-items: center;
+  gap: 10px; transition: all 0.12s; margin-bottom: 2px;
+}
+.sidebar-nav li:hover { background: var(--e-surface-sunken); color: var(--e-text); }
+.sidebar-nav li.active {
+  background: var(--e-navy-05); color: var(--e-navy);
+  font-weight: 600;
+}
+[data-theme="light"] .sidebar-nav li.active { background: #EDEDF4; color: #050443; }
+[data-theme="dark"] .sidebar-nav li.active { background: rgba(245,184,64,0.12); color: var(--e-amber); }
+.sidebar-nav li .icon { width: 20px; text-align: center; font-size: 14px; opacity: 0.7; }
+.sidebar-nav li.active .icon { opacity: 1; }
+
+/* ─── Form Inputs ─── */
+.field { min-width: 160px; }
+.field label { display: block; font-size: 13px; font-weight: 600; color: var(--e-text-secondary); margin-bottom: 6px; }
+.field input, .field select, .field textarea {
+  width: 100%; padding: 10px 14px; border-radius: 10px;
+  border: 1.5px solid var(--e-input-border); background: var(--e-input-bg);
+  color: var(--e-text); font-size: 14px; font-family: 'Inter', sans-serif;
+  outline: none; transition: border-color 0.2s, box-shadow 0.2s; line-height: 1.5;
+}
+.field input::placeholder, .field textarea::placeholder { color: var(--e-input-placeholder); }
+.field input:focus, .field select:focus, .field textarea:focus {
+  border-color: var(--e-input-border-focus);
+  box-shadow: var(--e-focus-ring);
+}
+.field select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M3 4.5L6 7.5L9 4.5' fill='none' stroke='%238887AD' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px;
+}
+.checkbox-row {
+  display: flex; align-items: center; gap: 10px; font-size: 14px;
+  color: var(--e-text-secondary); cursor: pointer;
+}
+.checkbox-row input[type="checkbox"] {
+  width: 18px; height: 18px; border-radius: 5px; border: 1.5px solid var(--e-input-border);
+  appearance: none; background: var(--e-input-bg); cursor: pointer; transition: all 0.15s; flex-shrink: 0;
+}
+.checkbox-row input[type="checkbox"]:checked {
+  background: #050443; border-color: #050443;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6L5 8.5L9.5 3.5' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: center;
+}
+[data-theme="dark"] .checkbox-row input[type="checkbox"]:checked {
+  background: var(--e-amber); border-color: var(--e-amber);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6L5 8.5L9.5 3.5' fill='none' stroke='%23050443' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* ─── Table ─── */
+.tbl { width: 100%; border-collapse: collapse; font-size: 14px; }
+.tbl th {
+  text-align: left; padding: 12px 16px; font-weight: 600; font-size: 12px;
+  color: var(--e-text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--e-border);
+}
+.tbl td { padding: 14px 16px; border-bottom: 1px solid var(--e-border); }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl tr:hover td { background: var(--e-surface-sunken); }
+.tbl .mono { font-size: 13px; font-weight: 500; color: var(--e-text-secondary); letter-spacing: -0.2px; }
+
+/* ─── Mockup ─── */
+.mockup-card {
+  background: var(--e-surface); border: 1px solid var(--e-border);
+  border-radius: 16px; overflow: hidden; box-shadow: var(--e-card-shadow);
+}
+.mockup-hdr {
+  padding: 18px 24px; border-bottom: 1px solid var(--e-border);
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+.mockup-body { padding: 24px; }
+
+/* ─── Timeline ─── */
+.timeline { display: flex; gap: 0; align-items: flex-start; margin: 20px 0; }
+.tl-step { flex: 1; text-align: center; position: relative; }
+.tl-dot {
+  width: 32px; height: 32px; border-radius: 50%; margin: 0 auto 10px;
+  display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700;
+}
+.tl-dot.done { background: #050443; color: #F5A410; }
+[data-theme="dark"] .tl-dot.done { background: var(--e-amber); color: #050443; }
+.tl-dot.active { background: #F5A410; color: #050443; animation: pulse 2s infinite; }
+[data-theme="dark"] .tl-dot.active { background: #F5B840; color: #050443; }
+.tl-dot.wait { background: var(--e-border-strong); color: var(--e-text-muted); }
+.tl-label { font-size: 13px; color: var(--e-text-secondary); font-weight: 500; }
+.tl-sub { font-size: 12px; color: var(--e-text-muted); margin-top: 3px; }
+.tl-line { position: absolute; top: 16px; left: calc(50% + 17px); right: calc(-50% + 17px); height: 2px; background: var(--e-border-strong); }
+.tl-line.done { background: #050443; }
+[data-theme="dark"] .tl-line.done { background: var(--e-amber); }
+@keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(245,164,16,0.35); } 50% { box-shadow: 0 0 0 8px rgba(245,164,16,0); } }
+
+/* ─── Utilities ─── */
+.flex { display: flex; }
+.flex-wrap { flex-wrap: wrap; }
+.gap-8 { gap: 8px; }
+.gap-12 { gap: 12px; }
+.gap-16 { gap: 16px; }
+.items-center { align-items: center; }
+.items-end { align-items: flex-end; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 14px; }
+</style>
+</head>
+<body>
+<div class="wrap" id="root">
+
+<!-- ═══ HEADER ═══ -->
+<div class="hdr">
+  <div class="hdr-left">
+    <div class="logo">E</div>
+    <h1>EDMA <span>design system v3</span></h1>
+  </div>
+  <div class="tog" id="theme-toggle">
+    <span class="tog-label">Light</span>
+    <div class="tog-track"><div class="tog-knob"></div></div>
+    <span class="tog-label">Dark</span>
+  </div>
+</div>
+
+<!-- ═══ BRAND COLORS ═══ -->
+<p class="sec">Brand colors — from edma.co</p>
+<div class="swatch-row">
+  <div class="swatch" style="background:#050443;color:#F5A410;border:none">Navy<span class="swatch-hex">#050443</span></div>
+  <div class="swatch" style="background:#1E1D5C;color:#fff;border:none">Navy 80<span class="swatch-hex">#1E1D5C</span></div>
+  <div class="swatch" style="background:#3A3978;color:#fff;border:none">Navy 60<span class="swatch-hex">#3A3978</span></div>
+  <div class="swatch" style="background:#6968A1;color:#fff;border:none">Navy 40<span class="swatch-hex">#6968A1</span></div>
+  <div class="swatch" style="background:#B4B3D0;color:#050443">Navy 20<span class="swatch-hex">#B4B3D0</span></div>
+  <div class="swatch" style="background:#EDEDF4;color:#050443">Navy 05<span class="swatch-hex">#EDEDF4</span></div>
+</div>
+<div class="swatch-row">
+  <div class="swatch" style="background:#F5A410;color:#050443;border:none">Amber<span class="swatch-hex">#F5A410</span></div>
+  <div class="swatch" style="background:#E09309;color:#050443;border:none">Amber hover<span class="swatch-hex">#E09309</span></div>
+  <div class="swatch" style="background:#FEF4E1;color:#8B5A00">Amber soft<span class="swatch-hex">#FEF4E1</span></div>
+</div>
+
+<p class="sec">Semantic</p>
+<div class="swatch-row">
+  <div class="swatch" style="background:#10B981;color:#fff;border:none">Success<span class="swatch-hex">#10B981</span></div>
+  <div class="swatch" style="background:#EF4444;color:#fff;border:none">Danger<span class="swatch-hex">#EF4444</span></div>
+  <div class="swatch" style="background:#3B82F6;color:#fff;border:none">Info<span class="swatch-hex">#3B82F6</span></div>
+  <div class="swatch" style="background:#F59E0B;color:#fff;border:none">Warning<span class="swatch-hex">#F59E0B</span></div>
+</div>
+
+<div class="sep"></div>
+
+<!-- ═══ TYPOGRAPHY ═══ -->
+<p class="sec">Typography — Inter only, 14px minimum</p>
+<div class="type-sample"><div style="font-size:28px;font-weight:800;letter-spacing:-0.5px">Settlement controller</div><span class="spec">Display / 28px / 800</span></div>
+<div class="type-sample"><div style="font-size:20px;font-weight:600">Milestone verified</div><span class="spec">Heading / 20px / 600</span></div>
+<div class="type-sample"><div style="font-size:16px;font-weight:500">Section subheading</div><span class="spec">Subheading / 16px / 500</span></div>
+<div class="type-sample"><div style="font-size:14px;line-height:1.65">Escrow must be fully funded before shipping begins. Only cryptographic verification unlocks funds. Nothing mints, nothing settles, nothing moves until proof is on-chain.</div><span class="spec">Body / 14px / 400 / 1.65 line-height</span></div>
+<div class="type-sample"><div style="font-size:14px;color:var(--e-text-secondary)">Transaction submitted 2 blocks ago</div><span class="spec">Body secondary / 14px</span></div>
+<div class="type-sample"><div style="font-size:14px;font-weight:500;letter-spacing:-0.2px;color:var(--e-text-secondary)">0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0</div><span class="spec">Address / 14px / 500 / tight tracking</span></div>
+
+<div class="sep"></div>
+
+<!-- ═══ METRICS ═══ -->
+<p class="sec">Metric cards</p>
+<div class="flex gap-12 flex-wrap">
+  <div class="metric"><div class="metric-label">Total value locked</div><div class="metric-val">$4.2M</div><div class="metric-sub">+12.4% this week</div></div>
+  <div class="metric"><div class="metric-label">Active deals</div><div class="metric-val">847</div><div class="metric-sub">23 settling today</div></div>
+  <div class="metric"><div class="metric-label">EDM burned</div><div class="metric-val">1.8M</div><div class="metric-sub" style="color:var(--e-amber)">Supply: 498.2M</div></div>
+  <div class="metric"><div class="metric-label">Block height</div><div class="metric-val" style="letter-spacing:-0.3px">2,847,103</div><div class="metric-sub"><span class="dot dot-live"></span> 2s blocks</div></div>
+</div>
+
+<div class="sep"></div>
+
+<!-- ═══ BUTTONS ═══ -->
+<p class="sec">Buttons</p>
+<div class="flex gap-12 flex-wrap items-center" style="margin-bottom:16px">
+  <button class="btn btn-primary">Fund escrow</button>
+  <button class="btn btn-primary btn-sm">Approve</button>
+  <button class="btn btn-secondary">Submit claim</button>
+  <button class="btn btn-secondary btn-sm">Connect wallet</button>
+  <button class="btn btn-outline">View details</button>
+  <button class="btn btn-outline btn-sm">Export CSV</button>
+  <button class="btn btn-ghost">Cancel</button>
+  <button class="btn btn-danger">Revoke</button>
+</div>
+
+<!-- ═══ BADGES ═══ -->
+<p class="sec">Badges + status</p>
+<div class="flex gap-8 flex-wrap items-center">
+  <span class="badge badge-pass"><span class="dot dot-live"></span> Pass</span>
+  <span class="badge badge-fail"><span class="dot dot-off"></span> Fail</span>
+  <span class="badge badge-pending"><span class="dot dot-pending"></span> Pending</span>
+  <span class="badge badge-info">Milestone 3/5</span>
+  <span class="badge badge-pass">Active</span>
+  <span class="badge badge-fail">Revoked</span>
+  <span class="addr">0x9fE46736...fa6e0</span>
+  <span class="addr" style="color:var(--e-amber-text);background:var(--e-amber-soft);border-color:transparent">Chain 741</span>
+</div>
+
+<div class="sep"></div>
+
+<!-- ═══ NAVIGATION ═══ -->
+<p class="sec">Navigation — tab bar</p>
+<div class="nav" style="margin-bottom:20px">
+  <div class="nav-item active" onclick="activateTab(this)">Overview</div>
+  <div class="nav-item" onclick="activateTab(this)">Deals</div>
+  <div class="nav-item" onclick="activateTab(this)">Settlement</div>
+  <div class="nav-item" onclick="activateTab(this)">Attestors</div>
+  <div class="nav-item" onclick="activateTab(this)">Assets</div>
+</div>
+
+<p class="sec">Navigation — sidebar</p>
+<div class="card" style="padding:12px;max-width:260px">
+  <ul class="sidebar-nav">
+    <li class="active"><span class="icon">&#9673;</span> Overview</li>
+    <li><span class="icon">&#9634;</span> Deal rooms</li>
+    <li><span class="icon">&#8853;</span> Settlement</li>
+    <li><span class="icon">&#9670;</span> PoV console</li>
+    <li><span class="icon">&#9733;</span> Attestors</li>
+    <li><span class="icon">&#9651;</span> Assets</li>
+    <li><span class="icon">&#9881;</span> Settings</li>
+  </ul>
+</div>
+
+<div class="sep"></div>
+
+<!-- ═══ FORMS ═══ -->
+<p class="sec">Form inputs</p>
+<div class="flex gap-16 flex-wrap items-end" style="margin-bottom:16px">
+  <div class="field" style="flex:1;min-width:180px"><label>Order ID</label><input placeholder="Enter order ID or hash" /></div>
+  <div class="field" style="flex:1;min-width:160px"><label>Milestone</label><select><option>ON_BOARD</option><option>CUSTOMS</option><option>ARRIVAL_QA</option><option>DELIVERY</option></select></div>
+  <div class="field" style="flex:1;min-width:140px"><label>Amount (EDSD)</label><input type="number" placeholder="10,000" /></div>
+  <button class="btn btn-primary" style="height:44px">Fund escrow</button>
+</div>
+<div class="flex gap-16 flex-wrap items-end" style="margin-bottom:16px">
+  <div class="field" style="flex:2;min-width:260px"><label>Supplier address</label><input placeholder="0x..." /></div>
+  <div class="field" style="flex:1;min-width:160px"><label>Corridor</label><input placeholder="CN-NL-SOLAR-01" /></div>
+</div>
+<div class="flex gap-16 flex-wrap" style="margin-bottom:16px">
+  <div class="field" style="flex:1;min-width:260px"><label>Notes</label><textarea rows="3" placeholder="Additional notes for this milestone..." style="resize:vertical"></textarea></div>
+</div>
+<div class="flex gap-16 flex-wrap items-center">
+  <label class="checkbox-row"><input type="checkbox" checked /> Require funding before shipping</label>
+  <label class="checkbox-row"><input type="checkbox" /> Auto-settle on PoV pass</label>
+</div>
+
+<div class="sep"></div>
+
+<!-- ═══ TABLE ═══ -->
+<p class="sec">Data table</p>
+<div class="card" style="padding:0;overflow:hidden">
+<table class="tbl">
+<thead><tr><th>Order</th><th>Milestone</th><th>Supplier</th><th>Amount</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td class="mono">ORD-2847</td><td>Customs clearance</td><td class="mono">0x70997...79C8</td><td style="font-weight:600">$24,500</td><td><span class="badge badge-pass"><span class="dot dot-live"></span> Pass</span></td></tr>
+<tr><td class="mono">ORD-2846</td><td>Arrival QA</td><td class="mono">0x3C44C...93BC</td><td style="font-weight:600">$18,200</td><td><span class="badge badge-pending"><span class="dot dot-pending"></span> Pending</span></td></tr>
+<tr><td class="mono">ORD-2845</td><td>On-board inspection</td><td class="mono">0xf39Fd...2266</td><td style="font-weight:600">$31,000</td><td><span class="badge badge-fail"><span class="dot dot-off"></span> Fail</span></td></tr>
+<tr><td class="mono">ORD-2844</td><td>Final delivery</td><td class="mono">0x70997...79C8</td><td style="font-weight:600">$42,750</td><td><span class="badge badge-pass"><span class="dot dot-live"></span> Pass</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="sep"></div>
+
+<!-- ═══ MOCKUP — SETTLEMENT ═══ -->
+<p class="sec">Mockup — milestone settlement</p>
+<div class="mockup-card">
+  <div class="mockup-hdr">
+    <div>
+      <span style="font-weight:700;font-size:16px">ORD-2847</span>
+      <span style="color:var(--e-text-muted);font-size:14px;margin-left:10px">Solar panel shipment — Shanghai to Rotterdam</span>
+    </div>
+    <span class="badge badge-pending"><span class="dot dot-pending"></span> In progress</span>
+  </div>
+  <div class="mockup-body">
+    <div class="flex" style="justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:16px">
+      <div><span style="font-size:13px;color:var(--e-text-muted)">Total value</span><div style="font-size:24px;font-weight:700;margin-top:2px">$124,500</div></div>
+      <div style="text-align:right"><span style="font-size:13px;color:var(--e-text-muted)">Corridor</span><div class="addr" style="margin-top:6px">CN-NL-SOLAR-01</div></div>
+      <div style="text-align:right"><span style="font-size:13px;color:var(--e-text-muted)">Supplier</span><div class="addr" style="margin-top:6px">0x70997970C518...79C8</div></div>
+    </div>
+    <div class="timeline">
+      <div class="tl-step"><div class="tl-line done"></div><div class="tl-dot done">1</div><div class="tl-label">On-board</div><div class="tl-sub">$24,900 — Paid</div></div>
+      <div class="tl-step"><div class="tl-line done"></div><div class="tl-dot done">2</div><div class="tl-label">Customs</div><div class="tl-sub">$24,900 — Paid</div></div>
+      <div class="tl-step"><div class="tl-line"></div><div class="tl-dot active">3</div><div class="tl-label">Arrival QA</div><div class="tl-sub">$37,350 — Awaiting</div></div>
+      <div class="tl-step"><div class="tl-dot wait">4</div><div class="tl-label">Delivery</div><div class="tl-sub">$37,350 — Locked</div></div>
+    </div>
+    <div class="flex gap-12 flex-wrap" style="margin-top:24px">
+      <div class="metric" style="flex:1"><div class="metric-label">Locked (EDSD)</div><div class="metric-val" style="font-size:20px">$74,700</div></div>
+      <div class="metric" style="flex:1"><div class="metric-label">Released</div><div class="metric-val" style="font-size:20px;color:var(--e-success)">$49,800</div></div>
+      <div class="metric" style="flex:1"><div class="metric-label">Platform fee</div><div class="metric-val" style="font-size:20px">$597</div></div>
+      <div class="metric" style="flex:1"><div class="metric-label">EDM burned</div><div class="metric-val" style="font-size:20px;color:var(--e-amber)">298</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="sep"></div>
+
+<!-- ═══ ATTESTOR CARD ═══ -->
+<p class="sec">Mockup — attestor card</p>
+<div class="card" style="display:flex;gap:20px;align-items:flex-start">
+  <div style="width:50px;height:50px;border-radius:50%;background:var(--e-amber-soft);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;color:var(--e-amber-text);flex-shrink:0">QA</div>
+  <div style="flex:1;min-width:0">
+    <div class="flex items-center gap-8 flex-wrap" style="margin-bottom:8px">
+      <span style="font-weight:700;font-size:16px">SGS Testing Lab</span>
+      <span class="badge badge-pass"><span class="dot dot-live"></span> Active</span>
+      <span class="badge badge-info">QA_LAB</span>
+      <span class="badge badge-info">CUSTOMS</span>
+    </div>
+    <div style="font-size:14px;color:var(--e-text-muted);margin-bottom:16px">Org: SGS SA — LEI: 549300... — Registered Mar 2026</div>
+    <div class="grid-4">
+      <div><div style="font-size:12px;color:var(--e-text-muted);margin-bottom:4px">Pass rate</div><div style="font-weight:700;font-size:18px">98.2%</div></div>
+      <div><div style="font-size:12px;color:var(--e-text-muted);margin-bottom:4px">Avg latency</div><div style="font-weight:700;font-size:18px">340ms</div></div>
+      <div><div style="font-size:12px;color:var(--e-text-muted);margin-bottom:4px">Reversals</div><div style="font-weight:700;font-size:18px">0.4%</div></div>
+      <div><div style="font-size:12px;color:var(--e-text-muted);margin-bottom:4px">Bond staked</div><div style="font-weight:700;font-size:18px">5,000 EDM</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="sep"></div>
+
+<!-- ═══ DESIGN PRINCIPLES ═══ -->
+<p class="sec">Design principles</p>
+<div class="grid-2">
+  <div class="card"><div style="font-weight:700;font-size:15px;margin-bottom:8px">Clarity first</div><div style="font-size:14px;color:var(--e-text-secondary);line-height:1.6">Every screen answers one question. Data density without visual overload. White space is a feature.</div></div>
+  <div class="card"><div style="font-weight:700;font-size:15px;margin-bottom:8px">Trust through transparency</div><div style="font-size:14px;color:var(--e-text-secondary);line-height:1.6">On-chain data one click away. Every number links to its source transaction.</div></div>
+  <div class="card"><div style="font-weight:700;font-size:15px;margin-bottom:8px">Progressive disclosure</div><div style="font-size:14px;color:var(--e-text-secondary);line-height:1.6">Summary first, detail on demand. Metrics up top, raw data below.</div></div>
+  <div class="card"><div style="font-weight:700;font-size:15px;margin-bottom:8px">Consistent language</div><div style="font-size:14px;color:var(--e-text-secondary);line-height:1.6">Same component, same interaction, everywhere. Modular across all EDMA apps.</div></div>
+</div>
+
+<div style="height:60px"></div>
+</div>
+
+<script>
+document.getElementById('theme-toggle').addEventListener('click', function() {
+  var root = document.getElementById('root');
+  var isDark = root.getAttribute('data-theme') === 'dark';
+  var next = isDark ? 'light' : 'dark';
+  root.setAttribute('data-theme', next);
+  document.body.style.background = getComputedStyle(root).getPropertyValue('--e-bg-page');
+});
+function activateTab(el) {
+  el.parentElement.querySelectorAll('.nav-item').forEach(function(i) { i.classList.remove('active'); });
+  el.classList.add('active');
+}
+document.querySelectorAll('.sidebar-nav li').forEach(function(li) {
+  li.addEventListener('click', function() {
+    this.parentElement.querySelectorAll('li').forEach(function(l) { l.classList.remove('active'); });
+    this.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
