@@ -138,6 +138,67 @@ html[data-theme="dark"] .tog-sm-knob{transform:translateX(18px)}
 .page-title span{color:var(--text);font-weight:700;font-size:20px}
 
 .hide{display:none}
+
+/* ═══ Mobile: hamburger menu ═══ */
+.topnav-burger{display:none;width:32px;height:32px;border:none;background:none;cursor:pointer;padding:4px;flex-shrink:0}
+.topnav-burger span{display:block;width:20px;height:2px;background:var(--text2);margin:4px auto;border-radius:2px;transition:all .2s}
+.mobile-menu{display:none;background:var(--surface);border-bottom:1px solid var(--border);padding:8px 16px}
+.mobile-menu.open{display:block}
+.mobile-menu a{display:block;padding:10px 14px;border-radius:8px;font-size:14px;font-weight:500;color:var(--text2);text-decoration:none}
+.mobile-menu a:hover,.mobile-menu a.active{background:var(--surface2);color:var(--text)}
+
+/* ═══ Responsive ═══ */
+@media(max-width:900px){
+  .topnav{padding:0 16px;gap:12px}
+  .topnav-links{display:none}
+  .topnav-burger{display:block}
+  .topnav-search{width:100%;min-width:0;flex:1}
+  .topnav-right{gap:8px}
+  .wrap{padding:16px}
+  .stats-bar{gap:8px}
+  .stat{min-width:calc(50% - 4px);padding:12px 14px}
+  .stat-val{font-size:17px}
+  .grid-2{grid-template-columns:1fr}
+  .grid-2-wide{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .topnav{height:auto;flex-wrap:wrap;padding:10px 14px;gap:8px}
+  .topnav-logo{font-size:15px}
+  .topnav-logo .mark{width:28px;height:28px;font-size:13px;border-radius:7px}
+  .topnav-right{width:100%;order:3}
+  .topnav-search{font-size:14px;padding:9px 12px}
+  .wrap{padding:12px}
+  .stats-bar{gap:6px}
+  .stat{min-width:calc(50% - 3px);padding:10px 12px}
+  .stat-label{font-size:10px}
+  .stat-val{font-size:15px}
+  .stat-sub{font-size:11px}
+  .card-hdr{padding:12px 14px}
+  .card-hdr h2{font-size:14px}
+  .tbl{font-size:12px}
+  .tbl th{padding:8px 10px;font-size:10px}
+  .tbl td{padding:9px 10px}
+  .block-row{padding:9px 12px;gap:10px}
+  .block-icon{width:30px;height:30px;font-size:10px}
+  .block-num{font-size:13px}
+  .detail-section{border-radius:12px;margin-bottom:14px}
+  .detail-hdr{padding:12px 14px;flex-wrap:wrap;gap:8px}
+  .detail-hdr h2{font-size:14px}
+  .detail-row{flex-direction:column;padding:10px 14px;gap:4px}
+  .detail-label{width:auto;font-size:12px}
+  .detail-value{font-size:13px}
+  .event-box{margin:6px 10px 12px;padding:10px 14px;font-size:12px;line-height:1.7}
+  .event-name{font-size:13px}
+  .event-param{font-size:11px}
+  .event-val{font-size:12px}
+  .page-title span{font-size:17px}
+  .method{font-size:10px;padding:2px 6px}
+  .badge{font-size:10px;padding:2px 8px}
+  .hash-link{font-size:12px}
+  .mono{font-size:12px}
+  /* Hide less important columns on small screens */
+  .tbl .hide-mobile{display:none}
+}
 </style>
 </head>
 <body>
@@ -148,6 +209,7 @@ html[data-theme="dark"] .tog-sm-knob{transform:translateX(18px)}
     <div class="mark">E</div>
     <span>EDMA Explorer</span>
   </div>
+  <button class="topnav-burger" onclick="document.getElementById('mobile-menu').classList.toggle('open')"><span></span><span></span><span></span></button>
   <div class="topnav-links">
     <a href="#" class="active" onclick="showView('home',this);return false">Home</a>
     <a href="#" onclick="showView('txdetail',this);return false">Transactions</a>
@@ -156,11 +218,18 @@ html[data-theme="dark"] .tog-sm-knob{transform:translateX(18px)}
     <a href="#" onclick="return false">Contracts</a>
   </div>
   <div class="topnav-right">
-    <input class="topnav-search" placeholder="Search by address, tx hash, block, token..." />
+    <input class="topnav-search" placeholder="Search by address, tx hash, block..." />
     <div class="tog-sm" onclick="document.documentElement.setAttribute('data-theme',document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark')">
       <div class="tog-sm-knob"></div>
     </div>
   </div>
+</div>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#" class="active" onclick="showView('home');closeMobileMenu();return false">Home</a>
+  <a href="#" onclick="showView('txdetail');closeMobileMenu();return false">Transactions</a>
+  <a href="#" onclick="closeMobileMenu();return false">Blocks</a>
+  <a href="#" onclick="closeMobileMenu();return false">Tokens</a>
+  <a href="#" onclick="closeMobileMenu();return false">Contracts</a>
 </div>
 
 <!-- ═══ VIEW: HOME ═══ -->
@@ -216,77 +285,77 @@ html[data-theme="dark"] .tog-sm-knob{transform:translateX(18px)}
     <div class="card-hdr"><h2>All transactions</h2><div style="font-size:13px;color:var(--text3)">Showing latest 50 of 1,247,803</div></div>
     <div style="overflow-x:auto">
     <table class="tbl">
-      <thead><tr><th>Tx Hash</th><th>Method</th><th>Block</th><th>From</th><th>To (Contract)</th><th>Age</th><th>Status</th></tr></thead>
+      <thead><tr><th>Tx Hash</th><th>Method</th><th class="hide-mobile">Block</th><th class="hide-mobile">From</th><th class="hide-mobile">To (Contract)</th><th>Age</th><th>Status</th></tr></thead>
       <tbody>
         <tr>
           <td><a class="hash-link" href="#" onclick="showView('txdetail');return false">0x7a3f8b...c4e2</a></td>
           <td><span class="method method-settle">settleTrancheOnPass</span></td>
-          <td class="mono">2,847,103</td>
-          <td class="mono">0xf39Fd...2266</td>
-          <td class="mono">SettlementController</td>
+          <td class="mono hide-mobile">2,847,103</td>
+          <td class="mono hide-mobile">0xf39Fd...2266</td>
+          <td class="mono hide-mobile">SettlementController</td>
           <td>2s ago</td>
           <td><span class="badge b-success"><span class="dot dot-g"></span> Success</span></td>
         </tr>
         <tr>
           <td><a class="hash-link" href="#">0x91d2e4...8f17</a></td>
           <td><span class="method method-pov">evaluateClaim</span></td>
-          <td class="mono">2,847,103</td>
-          <td class="mono">0x70997...79C8</td>
-          <td class="mono">PoVGate</td>
+          <td class="mono hide-mobile">2,847,103</td>
+          <td class="mono hide-mobile">0x70997...79C8</td>
+          <td class="mono hide-mobile">PoVGate</td>
           <td>4s ago</td>
           <td><span class="badge b-success"><span class="dot dot-g"></span> Success</span></td>
         </tr>
         <tr>
           <td><a class="hash-link" href="#">0x3c8a12...d093</a></td>
           <td><span class="method method-mint">ETT.mint</span></td>
-          <td class="mono">2,847,102</td>
-          <td class="mono">0x3C44C...93BC</td>
-          <td class="mono">ETT</td>
+          <td class="mono hide-mobile">2,847,102</td>
+          <td class="mono hide-mobile">0x3C44C...93BC</td>
+          <td class="mono hide-mobile">ETT</td>
           <td>6s ago</td>
           <td><span class="badge b-success"><span class="dot dot-g"></span> Success</span></td>
         </tr>
         <tr>
           <td><a class="hash-link" href="#">0xb47f09...a1c6</a></td>
           <td><span class="method">EDSD.lock</span></td>
-          <td class="mono">2,847,102</td>
-          <td class="mono">0xf39Fd...2266</td>
-          <td class="mono">EDSD</td>
+          <td class="mono hide-mobile">2,847,102</td>
+          <td class="mono hide-mobile">0xf39Fd...2266</td>
+          <td class="mono hide-mobile">EDSD</td>
           <td>8s ago</td>
           <td><span class="badge b-success"><span class="dot dot-g"></span> Success</span></td>
         </tr>
         <tr>
           <td><a class="hash-link" href="#">0x5e2d91...7b48</a></td>
           <td><span class="method method-burn">EDMBurner.burn</span></td>
-          <td class="mono">2,847,102</td>
-          <td class="mono">0x0165...8F5e</td>
-          <td class="mono">EDMBurner</td>
+          <td class="mono hide-mobile">2,847,102</td>
+          <td class="mono hide-mobile">0x0165...8F5e</td>
+          <td class="mono hide-mobile">EDMBurner</td>
           <td>8s ago</td>
           <td><span class="badge b-success"><span class="dot dot-g"></span> Success</span></td>
         </tr>
         <tr>
           <td><a class="hash-link" href="#">0xf8c463...2e90</a></td>
           <td><span class="method method-mint">CertificateNFT.mint</span></td>
-          <td class="mono">2,847,101</td>
-          <td class="mono">0x70997...79C8</td>
-          <td class="mono">CertificateNFT</td>
+          <td class="mono hide-mobile">2,847,101</td>
+          <td class="mono hide-mobile">0x70997...79C8</td>
+          <td class="mono hide-mobile">CertificateNFT</td>
           <td>10s ago</td>
           <td><span class="badge b-success"><span class="dot dot-g"></span> Success</span></td>
         </tr>
         <tr>
           <td><a class="hash-link" href="#">0x2a9b87...d5f1</a></td>
           <td><span class="method method-pov">evaluateClaim</span></td>
-          <td class="mono">2,847,101</td>
-          <td class="mono">0x3C44C...93BC</td>
-          <td class="mono">PoVGate</td>
+          <td class="mono hide-mobile">2,847,101</td>
+          <td class="mono hide-mobile">0x3C44C...93BC</td>
+          <td class="mono hide-mobile">PoVGate</td>
           <td>12s ago</td>
           <td><span class="badge b-fail"><span class="dot dot-r"></span> Reverted</span></td>
         </tr>
         <tr>
           <td><a class="hash-link" href="#">0xc130e5...94a7</a></td>
           <td><span class="method">EDSD.mint</span></td>
-          <td class="mono">2,847,100</td>
-          <td class="mono">0xf39Fd...2266</td>
-          <td class="mono">EDSD</td>
+          <td class="mono hide-mobile">2,847,100</td>
+          <td class="mono hide-mobile">0xf39Fd...2266</td>
+          <td class="mono hide-mobile">EDSD</td>
           <td>14s ago</td>
           <td><span class="badge b-success"><span class="dot dot-g"></span> Success</span></td>
         </tr>
@@ -418,6 +487,7 @@ html[data-theme="dark"] .tog-sm-knob{transform:translateX(18px)}
 </div>
 
 <script>
+function closeMobileMenu(){document.getElementById('mobile-menu').classList.remove('open')}
 function showView(id,linkEl) {
   document.querySelectorAll('.wrap').forEach(function(v){v.classList.add('hide')});
   document.getElementById('view-'+id).classList.remove('hide');
