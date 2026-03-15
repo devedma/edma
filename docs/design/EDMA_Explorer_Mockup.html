@@ -8,49 +8,56 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
+/* ═══ EDMA Design System v3 — Tokens ═══ */
 html[data-theme="light"]{
-  --bg:#F6F6FA;--surface:#FFFFFF;--surface2:#F0F0F6;--surface3:#E8E8F0;
-  --border:#E2E2EC;--border2:#CDCDD9;
-  --text:#050443;--text2:#3A3978;--text3:#8887AD;
-  --amber:#F5A410;--amber-hover:#E09309;--amber-soft:#FEF4E1;--amber-text:#8B5A00;
-  --success:#10B981;--success-soft:#E8FAF3;--success-text:#065F46;
-  --danger:#EF4444;--danger-soft:#FEF2F2;--danger-text:#991B1B;
-  --info:#3B82F6;--info-soft:#EFF6FF;--info-text:#1E40AF;
-  --warn-soft:#FFFBEB;--warn-text:#92400E;
-  --card-sh:0 1px 3px rgba(5,4,67,0.06);
-  --input-bg:#fff;--input-border:#CDCDD9;
+  --e-navy:#050443;--e-navy-80:#1E1D5C;--e-navy-60:#3A3978;--e-navy-40:#6968A1;--e-navy-20:#B4B3D0;--e-navy-10:#D9D9E7;--e-navy-05:#EDEDF4;
+  --e-amber:#F5A410;--e-amber-hover:#E09309;--e-amber-soft:#FEF4E1;--e-amber-text:#8B5A00;
+  --e-bg:#FFFFFF;--e-bg-page:#F6F6FA;
+  --e-surface:#FFFFFF;--e-surface-raised:#FFFFFF;--e-surface-sunken:#F0F0F6;
+  --e-border:#E2E2EC;--e-border-strong:#CDCDD9;
+  --e-text:#050443;--e-text-secondary:#3A3978;--e-text-muted:#8887AD;
+  --e-success:#10B981;--e-success-soft:#E8FAF3;--e-success-text:#065F46;
+  --e-danger:#EF4444;--e-danger-soft:#FEF2F2;--e-danger-text:#991B1B;
+  --e-info:#3B82F6;--e-info-soft:#EFF6FF;--e-info-text:#1E40AF;
+  --e-warning:#F59E0B;--e-warning-soft:#FFFBEB;--e-warning-text:#92400E;
+  --e-input-bg:#FFFFFF;--e-input-border:#CDCDD9;--e-input-border-focus:#050443;--e-input-placeholder:#8887AD;
+  --e-card-shadow:0 1px 3px rgba(5,4,67,0.06);--e-card-shadow-hover:0 4px 16px rgba(5,4,67,0.1);
+  --e-focus-ring:0 0 0 3px rgba(5,4,67,0.12);
 }
 html[data-theme="dark"]{
-  --bg:#02011E;--surface:#0F1115;--surface2:#161A22;--surface3:#1C2129;
-  --border:#1E2330;--border2:#2A303D;
-  --text:#FFFFFF;--text2:#B0B8C9;--text3:#6B7486;
-  --amber:#F5A410;--amber-hover:#F7B840;--amber-soft:rgba(245,164,16,0.15);--amber-text:#F5C96A;
-  --success:#3EDBA1;--success-soft:rgba(62,219,161,0.15);--success-text:#7AEDC5;
-  --danger:#F87171;--danger-soft:rgba(248,113,113,0.15);--danger-text:#FCA5A5;
-  --info:#6EB1FF;--info-soft:rgba(110,177,255,0.15);--info-text:#A3CEFF;
-  --warn-soft:rgba(251,191,36,0.15);--warn-text:#FDE08A;
-  --card-sh:0 2px 8px rgba(0,0,0,0.4);
-  --input-bg:#161A22;--input-border:#2A303D;
+  --e-navy:#FFFFFF;--e-navy-80:#D5D4E6;--e-navy-60:#A8A7C8;--e-navy-40:#706FA0;--e-navy-20:#363466;--e-navy-10:#201F55;--e-navy-05:#0C0B3A;
+  --e-amber:#F5A410;--e-amber-hover:#F7B840;--e-amber-soft:rgba(245,164,16,0.15);--e-amber-text:#F5C96A;
+  --e-bg:#0F1115;--e-bg-page:#0A0C0F;
+  --e-surface:#161A22;--e-surface-raised:#1C2129;--e-surface-sunken:#12151B;
+  --e-border:#1E2330;--e-border-strong:#2A303D;
+  --e-text:#FFFFFF;--e-text-secondary:#B0B8C9;--e-text-muted:#6B7486;
+  --e-success:#3EDBA1;--e-success-soft:rgba(62,219,161,0.15);--e-success-text:#7AEDC5;
+  --e-danger:#F87171;--e-danger-soft:rgba(248,113,113,0.15);--e-danger-text:#FCA5A5;
+  --e-info:#6EB1FF;--e-info-soft:rgba(110,177,255,0.15);--e-info-text:#A3CEFF;
+  --e-warning:#FBC34E;--e-warning-soft:rgba(251,195,78,0.15);--e-warning-text:#FDE08A;
+  --e-input-bg:#12151B;--e-input-border:#2A303D;--e-input-border-focus:#F5A410;--e-input-placeholder:#6B7486;
+  --e-card-shadow:0 2px 8px rgba(0,0,0,0.4);--e-card-shadow-hover:0 8px 24px rgba(0,0,0,0.5);
+  --e-focus-ring:0 0 0 3px rgba(245,164,16,0.3);
 }
 
-body{font-family:'Inter',sans-serif;font-size:14px;line-height:1.6;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+body{font-family:'Inter',sans-serif;font-size:14px;line-height:1.6;background:var(--e-bg-page);color:var(--e-text);-webkit-font-smoothing:antialiased}
 
 /* Top nav */
-.topnav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;height:56px;gap:24px;position:sticky;top:0;z-index:100}
+.topnav{background:var(--e-surface);border-bottom:1px solid var(--e-border);padding:0 24px;display:flex;align-items:center;height:56px;gap:24px;position:sticky;top:0;z-index:100}
 .topnav-logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px}
 .topnav-logo .mark{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px}
 html[data-theme="light"] .mark{background:#050443;color:#F5A410}
 html[data-theme="dark"] .mark{background:#F5A410;color:#050443}
 .topnav-links{display:flex;gap:4px}
-.topnav-links a{padding:6px 14px;border-radius:8px;font-size:13px;font-weight:500;color:var(--text3);text-decoration:none;transition:all .12s}
-.topnav-links a:hover{color:var(--text);background:var(--surface2)}
-.topnav-links a.active{color:var(--text);background:var(--surface2);font-weight:600}
+.topnav-links a{padding:6px 14px;border-radius:8px;font-size:13px;font-weight:500;color:var(--e-text-muted);text-decoration:none;transition:all .12s}
+.topnav-links a:hover{color:var(--e-text);background:var(--e-surface-sunken)}
+.topnav-links a.active{color:var(--e-text);background:var(--e-surface-sunken);font-weight:600}
 .topnav-right{margin-left:auto;display:flex;align-items:center;gap:12px}
-.topnav-search{padding:7px 14px;border-radius:8px;border:1px solid var(--border);background:var(--input-bg);color:var(--text);font-size:13px;width:320px;outline:none;font-family:'Inter',sans-serif}
-.topnav-search::placeholder{color:var(--text3)}
+.topnav-search{padding:7px 14px;border-radius:8px;border:1px solid var(--e-border);background:var(--e-input-bg);color:var(--e-text);font-size:13px;width:320px;outline:none;font-family:'Inter',sans-serif}
+.topnav-search::placeholder{color:var(--e-text-muted)}
 .tog-sm{width:40px;height:22px;border-radius:11px;position:relative;cursor:pointer;transition:background .3s}
-html[data-theme="light"] .tog-sm{background:var(--border2)}
-html[data-theme="dark"] .tog-sm{background:var(--amber)}
+html[data-theme="light"] .tog-sm{background:var(--e-border-strong)}
+html[data-theme="dark"] .tog-sm{background:var(--e-amber)}
 .tog-sm-knob{width:16px;height:16px;border-radius:50%;background:#fff;position:absolute;top:3px;left:3px;transition:transform .3s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
 html[data-theme="dark"] .tog-sm-knob{transform:translateX(18px)}
 
@@ -58,94 +65,94 @@ html[data-theme="dark"] .tog-sm-knob{transform:translateX(18px)}
 
 /* Chain stats bar */
 .stats-bar{display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap}
-.stat{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 18px;flex:1;min-width:140px;box-shadow:var(--card-sh)}
-.stat-label{font-size:11px;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.stat{background:var(--e-surface);border:1px solid var(--e-border);border-radius:12px;padding:14px 18px;flex:1;min-width:140px;box-shadow:var(--e-card-shadow)}
+.stat-label{font-size:11px;color:var(--e-text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
 .stat-val{font-size:20px;font-weight:700;letter-spacing:-.3px}
-.stat-sub{font-size:12px;color:var(--success);font-weight:500;margin-top:2px}
+.stat-sub{font-size:12px;color:var(--e-success);font-weight:500;margin-top:2px}
 
 /* Card */
-.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--card-sh);overflow:hidden}
-.card-hdr{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.card{background:var(--e-surface);border:1px solid var(--e-border);border-radius:14px;box-shadow:var(--e-card-shadow);overflow:hidden}
+.card-hdr{padding:14px 20px;border-bottom:1px solid var(--e-border);display:flex;align-items:center;justify-content:space-between}
 .card-hdr h2{font-size:15px;font-weight:700}
-.card-hdr a{font-size:13px;color:var(--amber);text-decoration:none;font-weight:500}
+.card-hdr a{font-size:13px;color:var(--e-amber);text-decoration:none;font-weight:500}
 
 /* Table */
 .tbl{width:100%;border-collapse:collapse;font-size:13px}
-.tbl th{text-align:left;padding:10px 16px;font-weight:600;font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)}
-.tbl td{padding:11px 16px;border-bottom:1px solid var(--border);vertical-align:middle}
+.tbl th{text-align:left;padding:10px 16px;font-weight:600;font-size:11px;color:var(--e-text-muted);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--e-border)}
+.tbl td{padding:11px 16px;border-bottom:1px solid var(--e-border);vertical-align:middle}
 .tbl tr:last-child td{border-bottom:none}
-.tbl tr:hover td{background:var(--surface2)}
-.mono{font-weight:500;letter-spacing:-.2px;color:var(--text2)}
-.hash-link{color:var(--info-text);font-weight:500;text-decoration:none;letter-spacing:-.2px}
+.tbl tr:hover td{background:var(--e-surface-sunken)}
+.mono{font-weight:500;letter-spacing:-.2px;color:var(--e-text-secondary)}
+.hash-link{color:var(--e-info-text);font-weight:500;text-decoration:none;letter-spacing:-.2px}
 .hash-link:hover{text-decoration:underline}
 
 /* Badges */
 .badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:16px;font-size:11px;font-weight:600}
-.b-success{background:var(--success-soft);color:var(--success-text)}
-.b-fail{background:var(--danger-soft);color:var(--danger-text)}
-.b-pending{background:var(--amber-soft);color:var(--amber-text)}
-.b-info{background:var(--info-soft);color:var(--info-text)}
+.b-success{background:var(--e-success-soft);color:var(--e-success-text)}
+.b-fail{background:var(--e-danger-soft);color:var(--e-danger-text)}
+.b-pending{background:var(--e-amber-soft);color:var(--e-amber-text)}
+.b-info{background:var(--e-info-soft);color:var(--e-info-text)}
 .dot{width:6px;height:6px;border-radius:50%;display:inline-block}
-.dot-g{background:var(--success)}
-.dot-r{background:var(--danger)}
-.dot-y{background:var(--amber)}
+.dot-g{background:var(--e-success)}
+.dot-r{background:var(--e-danger)}
+.dot-y{background:var(--e-amber)}
 
 /* Method pill */
-.method{display:inline-block;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:600;background:var(--surface2);border:1px solid var(--border);color:var(--text2)}
-.method-pov{background:var(--info-soft);color:var(--info-text);border-color:transparent}
-.method-settle{background:var(--success-soft);color:var(--success-text);border-color:transparent}
-.method-mint{background:var(--amber-soft);color:var(--amber-text);border-color:transparent}
-.method-burn{background:var(--danger-soft);color:var(--danger-text);border-color:transparent}
+.method{display:inline-block;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:600;background:var(--e-surface-sunken);border:1px solid var(--e-border);color:var(--e-text-secondary)}
+.method-pov{background:var(--e-info-soft);color:var(--e-info-text);border-color:transparent}
+.method-settle{background:var(--e-success-soft);color:var(--e-success-text);border-color:transparent}
+.method-mint{background:var(--e-amber-soft);color:var(--e-amber-text);border-color:transparent}
+.method-burn{background:var(--e-danger-soft);color:var(--e-danger-text);border-color:transparent}
 
 /* Grid */
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .grid-2-wide{display:grid;grid-template-columns:2fr 1fr;gap:20px}
 
 /* Block mini */
-.block-row{display:flex;align-items:center;gap:14px;padding:11px 16px;border-bottom:1px solid var(--border)}
+.block-row{display:flex;align-items:center;gap:14px;padding:11px 16px;border-bottom:1px solid var(--e-border)}
 .block-row:last-child{border-bottom:none}
-.block-row:hover{background:var(--surface2)}
-.block-icon{width:36px;height:36px;border-radius:8px;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--text3);flex-shrink:0}
+.block-row:hover{background:var(--e-surface-sunken)}
+.block-icon{width:36px;height:36px;border-radius:8px;background:var(--e-surface-sunken);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--e-text-muted);flex-shrink:0}
 .block-info{flex:1;min-width:0}
 .block-num{font-weight:600;font-size:14px}
-.block-meta{font-size:12px;color:var(--text3)}
-.block-txcount{font-size:12px;color:var(--text2);text-align:right;white-space:nowrap}
+.block-meta{font-size:12px;color:var(--e-text-muted)}
+.block-txcount{font-size:12px;color:var(--e-text-secondary);text-align:right;white-space:nowrap}
 
 /* TX detail section */
-.detail-section{background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--card-sh);margin-bottom:20px;overflow:hidden}
-.detail-hdr{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
+.detail-section{background:var(--e-surface);border:1px solid var(--e-border);border-radius:14px;box-shadow:var(--e-card-shadow);margin-bottom:20px;overflow:hidden}
+.detail-hdr{padding:16px 20px;border-bottom:1px solid var(--e-border);display:flex;align-items:center;gap:12px}
 .detail-hdr h2{font-size:16px;font-weight:700}
 .detail-rows{padding:0}
-.detail-row{display:flex;padding:12px 20px;border-bottom:1px solid var(--border);gap:16px}
+.detail-row{display:flex;padding:12px 20px;border-bottom:1px solid var(--e-border);gap:16px}
 .detail-row:last-child{border-bottom:none}
-.detail-row:hover{background:var(--surface2)}
-.detail-label{width:180px;flex-shrink:0;font-size:13px;color:var(--text3);font-weight:500}
+.detail-row:hover{background:var(--e-surface-sunken)}
+.detail-label{width:180px;flex-shrink:0;font-size:13px;color:var(--e-text-muted);font-weight:500}
 .detail-value{flex:1;font-size:14px;word-break:break-all}
 
 /* Tab switch */
-.view-tabs{display:flex;gap:2px;margin-bottom:24px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:4px;width:fit-content}
-.view-tab{padding:8px 20px;border-radius:9px;font-size:14px;font-weight:500;color:var(--text3);cursor:pointer;transition:all .12s}
-.view-tab:hover{color:var(--text)}
-.view-tab.active{background:var(--surface2);color:var(--text);font-weight:600;box-shadow:var(--card-sh)}
+.view-tabs{display:flex;gap:2px;margin-bottom:24px;background:var(--e-surface);border:1px solid var(--e-border);border-radius:12px;padding:4px;width:fit-content}
+.view-tab{padding:8px 20px;border-radius:9px;font-size:14px;font-weight:500;color:var(--e-text-muted);cursor:pointer;transition:all .12s}
+.view-tab:hover{color:var(--e-text)}
+.view-tab.active{background:var(--e-surface-sunken);color:var(--e-text);font-weight:600;box-shadow:var(--e-card-shadow)}
 
 /* Event log */
-.event-box{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin:8px 20px 16px;font-size:13px;line-height:1.8}
-.event-name{font-weight:700;color:var(--amber)}
-.event-param{color:var(--text3);font-size:12px}
-.event-val{color:var(--text);font-weight:500}
+.event-box{background:var(--e-surface-sunken);border:1px solid var(--e-border);border-radius:10px;padding:14px 18px;margin:8px 20px 16px;font-size:13px;line-height:1.8}
+.event-name{font-weight:700;color:var(--e-amber)}
+.event-param{color:var(--e-text-muted);font-size:12px}
+.event-val{color:var(--e-text);font-weight:500}
 
-.page-title{font-size:13px;color:var(--text3);font-weight:500;margin-bottom:16px;display:flex;align-items:center;gap:8px}
-.page-title span{color:var(--text);font-weight:700;font-size:20px}
+.page-title{font-size:13px;color:var(--e-text-muted);font-weight:500;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.page-title span{color:var(--e-text);font-weight:700;font-size:20px}
 
 .hide{display:none}
 
 /* ═══ Mobile: hamburger menu ═══ */
 .topnav-burger{display:none;width:32px;height:32px;border:none;background:none;cursor:pointer;padding:4px;flex-shrink:0}
-.topnav-burger span{display:block;width:20px;height:2px;background:var(--text2);margin:4px auto;border-radius:2px;transition:all .2s}
-.mobile-menu{display:none;background:var(--surface);border-bottom:1px solid var(--border);padding:8px 16px}
+.topnav-burger span{display:block;width:20px;height:2px;background:var(--e-text-secondary);margin:4px auto;border-radius:2px;transition:all .2s}
+.mobile-menu{display:none;background:var(--e-surface);border-bottom:1px solid var(--e-border);padding:8px 16px}
 .mobile-menu.open{display:block}
-.mobile-menu a{display:block;padding:10px 14px;border-radius:8px;font-size:14px;font-weight:500;color:var(--text2);text-decoration:none}
-.mobile-menu a:hover,.mobile-menu a.active{background:var(--surface2);color:var(--text)}
+.mobile-menu a{display:block;padding:10px 14px;border-radius:8px;font-size:14px;font-weight:500;color:var(--e-text-secondary);text-decoration:none}
+.mobile-menu a:hover,.mobile-menu a.active{background:var(--e-surface-sunken);color:var(--e-text)}
 
 /* ═══ Responsive ═══ */
 @media(max-width:900px){
@@ -242,7 +249,7 @@ html[data-theme="dark"] .tog-sm-knob{transform:translateX(18px)}
     <div class="stat"><div class="stat-label">Block Height</div><div class="stat-val">2,847,103</div><div class="stat-sub"><span class="dot dot-g"></span> 2s blocks</div></div>
     <div class="stat"><div class="stat-label">Wallet Addresses</div><div class="stat-val">48,291</div></div>
     <div class="stat"><div class="stat-label">EDSD Supply</div><div class="stat-val">$12.4M</div><div class="stat-sub">$8.2M locked</div></div>
-    <div class="stat"><div class="stat-label">EDM Burned</div><div class="stat-val">1,847,203</div><div class="stat-sub" style="color:var(--amber)">498.15M supply</div></div>
+    <div class="stat"><div class="stat-label">EDM Burned</div><div class="stat-val">1,847,203</div><div class="stat-sub" style="color:var(--e-amber)">498.15M supply</div></div>
   </div>
 
   <div class="grid-2">
@@ -282,7 +289,7 @@ html[data-theme="dark"] .tog-sm-knob{transform:translateX(18px)}
 
   <!-- Full transaction list -->
   <div class="card">
-    <div class="card-hdr"><h2>All transactions</h2><div style="font-size:13px;color:var(--text3)">Showing latest 50 of 1,247,803</div></div>
+    <div class="card-hdr"><h2>All transactions</h2><div style="font-size:13px;color:var(--e-text-muted)">Showing latest 50 of 1,247,803</div></div>
     <div style="overflow-x:auto">
     <table class="tbl">
       <thead><tr><th>Tx Hash</th><th>Method</th><th class="hide-mobile">Block</th><th class="hide-mobile">From</th><th class="hide-mobile">To (Contract)</th><th>Age</th><th>Status</th></tr></thead>
@@ -368,7 +375,7 @@ html[data-theme="dark"] .tog-sm-knob{transform:translateX(18px)}
 <!-- ═══ VIEW: TX DETAIL ═══ -->
 <div class="wrap hide" id="view-txdetail">
 
-  <div class="page-title"><a href="#" onclick="showView('home');return false" style="color:var(--text3);text-decoration:none">&larr; Back</a> <span>Transaction details</span></div>
+  <div class="page-title"><a href="#" onclick="showView('home');return false" style="color:var(--e-text-muted);text-decoration:none">&larr; Back</a> <span>Transaction details</span></div>
 
   <!-- Overview -->
   <div class="detail-section">
@@ -377,27 +384,27 @@ html[data-theme="dark"] .tog-sm-knob{transform:translateX(18px)}
       <span class="badge b-success"><span class="dot dot-g"></span> Success</span>
     </div>
     <div class="detail-rows">
-      <div class="detail-row"><div class="detail-label">Transaction hash</div><div class="detail-value" style="color:var(--info-text);font-weight:500">0x7a3f8b29e14d6a0c9f2b7e85d3c1a4f6e8b0d2c4e2f7a1b3c5d9e0f4a6b8c4e2</div></div>
-      <div class="detail-row"><div class="detail-label">Status</div><div class="detail-value"><span class="badge b-success"><span class="dot dot-g"></span> Success</span> <span style="color:var(--text3);font-size:13px;margin-left:8px">Confirmed in 2 seconds</span></div></div>
+      <div class="detail-row"><div class="detail-label">Transaction hash</div><div class="detail-value" style="color:var(--e-info-text);font-weight:500">0x7a3f8b29e14d6a0c9f2b7e85d3c1a4f6e8b0d2c4e2f7a1b3c5d9e0f4a6b8c4e2</div></div>
+      <div class="detail-row"><div class="detail-label">Status</div><div class="detail-value"><span class="badge b-success"><span class="dot dot-g"></span> Success</span> <span style="color:var(--e-text-muted);font-size:13px;margin-left:8px">Confirmed in 2 seconds</span></div></div>
       <div class="detail-row"><div class="detail-label">Block</div><div class="detail-value"><a class="hash-link" href="#">2,847,103</a></div></div>
-      <div class="detail-row"><div class="detail-label">Timestamp</div><div class="detail-value">Mar 15, 2026 19:44:22 UTC <span style="color:var(--text3);font-size:13px">(2 seconds ago)</span></div></div>
+      <div class="detail-row"><div class="detail-label">Timestamp</div><div class="detail-value">Mar 15, 2026 19:44:22 UTC <span style="color:var(--e-text-muted);font-size:13px">(2 seconds ago)</span></div></div>
       <div class="detail-row">
         <div class="detail-label">Method</div>
-        <div class="detail-value"><span class="method method-settle">settleTrancheOnPass</span> <span style="color:var(--text3);font-size:13px;margin-left:8px">Release escrow on milestone verification</span></div>
+        <div class="detail-value"><span class="method method-settle">settleTrancheOnPass</span> <span style="color:var(--e-text-muted);font-size:13px;margin-left:8px">Release escrow on milestone verification</span></div>
       </div>
-      <div class="detail-row"><div class="detail-label">From</div><div class="detail-value"><a class="hash-link" href="#">0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266</a> <span style="color:var(--text3);font-size:12px;margin-left:6px">(Deployer)</span></div></div>
-      <div class="detail-row"><div class="detail-label">Interacted with</div><div class="detail-value"><a class="hash-link" href="#">0x0165878A594ca255338adfa4d48449f69242Eb8F</a> <span style="font-size:12px;background:var(--surface2);padding:2px 8px;border-radius:6px;margin-left:6px;color:var(--text2);border:1px solid var(--border)">SettlementController</span></div></div>
-      <div class="detail-row"><div class="detail-label">Gas used</div><div class="detail-value">342,187 <span style="color:var(--text3);font-size:13px">(of 500,000 limit)</span></div></div>
-      <div class="detail-row"><div class="detail-label">Transaction fee</div><div class="detail-value">0.000068 ETH <span style="color:var(--text3);font-size:13px">($0.0026)</span></div></div>
+      <div class="detail-row"><div class="detail-label">From</div><div class="detail-value"><a class="hash-link" href="#">0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266</a> <span style="color:var(--e-text-muted);font-size:12px;margin-left:6px">(Deployer)</span></div></div>
+      <div class="detail-row"><div class="detail-label">Interacted with</div><div class="detail-value"><a class="hash-link" href="#">0x0165878A594ca255338adfa4d48449f69242Eb8F</a> <span style="font-size:12px;background:var(--e-surface-sunken);padding:2px 8px;border-radius:6px;margin-left:6px;color:var(--e-text-secondary);border:1px solid var(--e-border)">SettlementController</span></div></div>
+      <div class="detail-row"><div class="detail-label">Gas used</div><div class="detail-value">342,187 <span style="color:var(--e-text-muted);font-size:13px">(of 500,000 limit)</span></div></div>
+      <div class="detail-row"><div class="detail-label">Transaction fee</div><div class="detail-value">0.000068 ETH <span style="color:var(--e-text-muted);font-size:13px">($0.0026)</span></div></div>
     </div>
   </div>
 
   <!-- Decoded Input -->
   <div class="detail-section">
-    <div class="detail-hdr"><h2>Decoded input data</h2><span style="font-size:12px;color:var(--text3)">Function: settleTrancheOnPass(bytes32,bytes32,bytes32,bytes32,bytes32)</span></div>
+    <div class="detail-hdr"><h2>Decoded input data</h2><span style="font-size:12px;color:var(--e-text-muted)">Function: settleTrancheOnPass(bytes32,bytes32,bytes32,bytes32,bytes32)</span></div>
     <div class="detail-rows">
-      <div class="detail-row"><div class="detail-label">orderId</div><div class="detail-value mono">0x4f52442d32383437000000000000000000000000000000000000000000000000 <span style="color:var(--text3);font-size:12px;margin-left:6px">(ORD-2847)</span></div></div>
-      <div class="detail-row"><div class="detail-label">milestoneId</div><div class="detail-value mono">0x41525249564c5f514100000000000000000000000000000000000000000000 <span style="color:var(--text3);font-size:12px;margin-left:6px">(ARRIVAL_QA)</span></div></div>
+      <div class="detail-row"><div class="detail-label">orderId</div><div class="detail-value mono">0x4f52442d32383437000000000000000000000000000000000000000000000000 <span style="color:var(--e-text-muted);font-size:12px;margin-left:6px">(ORD-2847)</span></div></div>
+      <div class="detail-row"><div class="detail-label">milestoneId</div><div class="detail-value mono">0x41525249564c5f514100000000000000000000000000000000000000000000 <span style="color:var(--e-text-muted);font-size:12px;margin-left:6px">(ARRIVAL_QA)</span></div></div>
       <div class="detail-row"><div class="detail-label">gatePassId</div><div class="detail-value mono">0x9d8c7b6a5f4e3d2c1b0a9f8e7d6c5b4a39281706f5e4d3c2b1a09f8e7d6c5b</div></div>
       <div class="detail-row"><div class="detail-label">uniquenessKey</div><div class="detail-value mono">0x8a7b6c5d4e3f2a1b0c9d8e7f6a5b4c3d2e1f0a9b8c7d6e5f4a3b2c1d0e9f8a</div></div>
       <div class="detail-row"><div class="detail-label">povHash</div><div class="detail-value mono">0xb3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4</div></div>
@@ -406,10 +413,10 @@ html[data-theme="dark"] .tog-sm-knob{transform:translateX(18px)}
 
   <!-- Events emitted -->
   <div class="detail-section">
-    <div class="detail-hdr"><h2>Events emitted (5)</h2><span style="font-size:12px;color:var(--text3)">This transaction triggered 5 events across 4 contracts</span></div>
+    <div class="detail-hdr"><h2>Events emitted (5)</h2><span style="font-size:12px;color:var(--e-text-muted)">This transaction triggered 5 events across 4 contracts</span></div>
 
     <div class="event-box">
-      <div><span class="event-name">GatePass</span> <span style="font-size:12px;color:var(--text3)">from PoVGate</span></div>
+      <div><span class="event-name">GatePass</span> <span style="font-size:12px;color:var(--e-text-muted)">from PoVGate</span></div>
       <div style="margin-top:6px">
         <span class="event-param">orderId:</span> <span class="event-val">0x4f52...0000 (ORD-2847)</span><br>
         <span class="event-param">milestoneId:</span> <span class="event-val">0x4152...0000 (ARRIVAL_QA)</span><br>
@@ -420,7 +427,7 @@ html[data-theme="dark"] .tog-sm-knob{transform:translateX(18px)}
     </div>
 
     <div class="event-box">
-      <div><span class="event-name">EMTMinted</span> <span style="font-size:12px;color:var(--text3)">from SettlementController</span></div>
+      <div><span class="event-name">EMTMinted</span> <span style="font-size:12px;color:var(--e-text-muted)">from SettlementController</span></div>
       <div style="margin-top:6px">
         <span class="event-param">emtId:</span> <span class="event-val">0xe7f8...a9b0</span><br>
         <span class="event-param">orderId:</span> <span class="event-val">0x4f52...0000 (ORD-2847)</span><br>
@@ -430,7 +437,7 @@ html[data-theme="dark"] .tog-sm-knob{transform:translateX(18px)}
     </div>
 
     <div class="event-box">
-      <div><span class="event-name">MilestoneSettled</span> <span style="font-size:12px;color:var(--text3)">from SettlementController</span></div>
+      <div><span class="event-name">MilestoneSettled</span> <span style="font-size:12px;color:var(--e-text-muted)">from SettlementController</span></div>
       <div style="margin-top:6px">
         <span class="event-param">orderId:</span> <span class="event-val">ORD-2847</span><br>
         <span class="event-param">milestoneId:</span> <span class="event-val">ARRIVAL_QA</span><br>
@@ -442,7 +449,7 @@ html[data-theme="dark"] .tog-sm-knob{transform:translateX(18px)}
     </div>
 
     <div class="event-box">
-      <div><span class="event-name">EDMBurned</span> <span style="font-size:12px;color:var(--text3)">from EDMBurner</span></div>
+      <div><span class="event-name">EDMBurned</span> <span style="font-size:12px;color:var(--e-text-muted)">from EDMBurner</span></div>
       <div style="margin-top:6px">
         <span class="event-param">amount:</span> <span class="event-val">75.00 EDM</span><br>
         <span class="event-param">orderId:</span> <span class="event-val">ORD-2847</span><br>
@@ -452,7 +459,7 @@ html[data-theme="dark"] .tog-sm-knob{transform:translateX(18px)}
     </div>
 
     <div class="event-box">
-      <div><span class="event-name">ReceiptEmitted</span> <span style="font-size:12px;color:var(--text3)">from SettlementController</span></div>
+      <div><span class="event-name">ReceiptEmitted</span> <span style="font-size:12px;color:var(--e-text-muted)">from SettlementController</span></div>
       <div style="margin-top:6px">
         <span class="event-param">receiptId:</span> <span class="event-val">0xf1e2...d3c4</span><br>
         <span class="event-param">claimId:</span> <span class="event-val">0x1a2b...3c4d</span><br>
@@ -471,7 +478,7 @@ html[data-theme="dark"] .tog-sm-knob{transform:translateX(18px)}
 
   <!-- Internal transactions -->
   <div class="detail-section">
-    <div class="detail-hdr"><h2>Internal transactions (4)</h2><span style="font-size:12px;color:var(--text3)">Calls made by this transaction to other contracts</span></div>
+    <div class="detail-hdr"><h2>Internal transactions (4)</h2><span style="font-size:12px;color:var(--e-text-muted)">Calls made by this transaction to other contracts</span></div>
     <div style="overflow-x:auto">
     <table class="tbl">
       <thead><tr><th>Type</th><th>From</th><th>To</th><th>Method</th></tr></thead>
