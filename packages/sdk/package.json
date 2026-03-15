@@ -1,0 +1,14 @@
+{
+  "name": "@edma/sdk",
+  "version": "0.1.0",
+  "private": true,
+  "description": "TypeScript SDK — bridge between edma-ops and EDMA L2 contracts",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  },
+  "dependencies": {
+    "ethers": "^6.13.0"
+  }
+}

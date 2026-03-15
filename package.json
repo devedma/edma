@@ -1,0 +1,29 @@
+{
+  "name": "edma",
+  "version": "0.1.0",
+  "private": true,
+  "description": "EDMA Layer-2 — Ethereum L2 for Real-World Assets with Proof-of-Verification",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "compile": "cd packages/contracts && npx hardhat compile",
+    "test": "cd packages/contracts && npx hardhat test",
+    "test:gas": "cd packages/contracts && REPORT_GAS=true npx hardhat test",
+    "coverage": "cd packages/contracts && npx hardhat coverage",
+    "deploy:local": "cd packages/contracts && npx hardhat run script/Deploy.s.js --network localhost",
+    "deploy:sepolia": "cd packages/contracts && npx hardhat run script/Deploy.s.js --network sepolia",
+    "node": "cd packages/contracts && npx hardhat node",
+    "clean": "cd packages/contracts && npx hardhat clean",
+    "devnet:up": "cd ops/devnet && bash start.sh",
+    "devnet:down": "cd ops/devnet && bash stop.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/devedma/edma.git"
+  },
+  "license": "BUSL-1.1",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
