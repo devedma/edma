@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EDMA Design System v1</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --e-bg: #FAFBFC;
+  --e-surface: #FFFFFF;
+  --e-surface2: #F3F4F6;
+  --e-surface3: #E5E7EB;
+  --e-border: #E5E7EB;
+  --e-border2: #D1D5DB;
+  --e-text: #0F1729;
+  --e-text2: #4B5563;
+  --e-text3: #9CA3AF;
+  --e-primary: #10B981;
+  --e-primary-hover: #059669;
+  --e-primary-soft: #ECFDF5;
+  --e-primary-text: #065F46;
+  --e-accent: #F59E0B;
+  --e-accent-soft: #FFFBEB;
+  --e-accent-text: #92400E;
+  --e-danger: #EF4444;
+  --e-danger-soft: #FEF2F2;
+  --e-danger-text: #991B1B;
+  --e-info: #3B82F6;
+  --e-info-soft: #EFF6FF;
+  --e-info-text: #1E40AF;
+  --e-card-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02);
+  --e-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --e-mono: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+  --e-radius: 10px;
+  --e-radius-lg: 14px;
+  --e-radius-sm: 6px;
+}
+.dark {
+  --e-bg: #0B0F1A;
+  --e-surface: #111827;
+  --e-surface2: #1F2937;
+  --e-surface3: #374151;
+  --e-border: #1F2937;
+  --e-border2: #374151;
+  --e-text: #F9FAFB;
+  --e-text2: #D1D5DB;
+  --e-text3: #6B7280;
+  --e-primary: #34D399;
+  --e-primary-hover: #6EE7B7;
+  --e-primary-soft: #064E3B;
+  --e-primary-text: #A7F3D0;
+  --e-accent: #FBBF24;
+  --e-accent-soft: #78350F;
+  --e-accent-text: #FDE68A;
+  --e-danger: #F87171;
+  --e-danger-soft: #7F1D1D;
+  --e-danger-text: #FECACA;
+  --e-info: #60A5FA;
+  --e-info-soft: #1E3A5F;
+  --e-info-text: #BFDBFE;
+  --e-card-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--e-font); background: var(--e-bg); color: var(--e-text); transition: background .3s, color .3s; line-height: 1.5; }
+.wrap { max-width: 960px; margin: 0 auto; padding: 2.5rem 2rem; }
+
+/* Header */
+.hdr { display: flex; align-items: center; justify-content: space-between; margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--e-border); }
+.hdr-left { display: flex; align-items: center; gap: 14px; }
+.logo { width: 42px; height: 42px; border-radius: 12px; background: linear-gradient(135deg, #10B981 0%, #059669 100%); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 20px; color: #fff; font-family: var(--e-font); }
+.hdr h1 { font-size: 24px; font-weight: 800; letter-spacing: -0.5px; }
+.hdr h1 span { font-weight: 400; color: var(--e-text3); font-size: 15px; margin-left: 10px; }
+
+/* Theme toggle */
+.tog { display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 13px; font-weight: 500; color: var(--e-text2); user-select: none; }
+.tog-track { width: 48px; height: 26px; border-radius: 13px; background: var(--e-border2); position: relative; transition: background .25s; }
+.dark .tog-track { background: var(--e-primary); }
+.tog-knob { width: 20px; height: 20px; border-radius: 50%; background: #fff; position: absolute; top: 3px; left: 3px; transition: transform .25s; box-shadow: 0 1px 3px rgba(0,0,0,0.15); }
+.dark .tog-knob { transform: translateX(22px); }
+
+/* Section headers */
+.sec { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--e-text3); margin: 3rem 0 1rem; }
+.sec:first-of-type { margin-top: 0; }
+.sep { height: 1px; background: var(--e-border); margin: 2.5rem 0; }
+
+/* Color swatches */
+.row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+.sw { flex: 1; min-width: 70px; height: 60px; border-radius: var(--e-radius); display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; border: 1px solid var(--e-border); transition: transform .15s; }
+.sw:hover { transform: scale(1.04); }
+.sw span { opacity: .6; font-size: 10px; font-family: var(--e-mono); margin-top: 3px; }
+
+/* Typography */
+.tr { margin-bottom: 18px; }
+.tr .cap { color: var(--e-text3); font-size: 12px; margin-top: 4px; font-family: var(--e-mono); }
+
+/* Cards */
+.card { background: var(--e-surface); border: 1px solid var(--e-border); border-radius: var(--e-radius-lg); padding: 18px 22px; box-shadow: var(--e-card-shadow); }
+
+/* Metrics */
+.metric { background: var(--e-surface2); border-radius: var(--e-radius); padding: 16px 20px; flex: 1; min-width: 130px; }
+.metric .label { font-size: 12px; color: var(--e-text3); margin-bottom: 4px; font-weight: 500; }
+.metric .val { font-size: 24px; font-weight: 700; letter-spacing: -0.5px; }
+.metric .sub { font-size: 12px; color: var(--e-primary); margin-top: 3px; font-weight: 500; }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 20px; border-radius: 8px; font-size: 13px; font-weight: 600; border: none; cursor: pointer; transition: all .15s; font-family: var(--e-font); }
+.btn:active { transform: scale(0.97); }
+.btn-primary { background: var(--e-primary); color: #fff; }
+.btn-primary:hover { background: var(--e-primary-hover); }
+.btn-outline { background: transparent; border: 1px solid var(--e-border2); color: var(--e-text); }
+.btn-outline:hover { background: var(--e-surface2); }
+.btn-ghost { background: transparent; color: var(--e-text2); border: none; }
+.btn-ghost:hover { background: var(--e-surface2); }
+.btn-danger { background: var(--e-danger-soft); color: var(--e-danger-text); border: 1px solid transparent; }
+.btn-danger:hover { opacity: .85; }
+.btn-sm { font-size: 12px; padding: 6px 14px; }
+
+/* Badges */
+.badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+.badge-pass { background: var(--e-primary-soft); color: var(--e-primary-text); }
+.badge-fail { background: var(--e-danger-soft); color: var(--e-danger-text); }
+.badge-pending { background: var(--e-accent-soft); color: var(--e-accent-text); }
+.badge-info { background: var(--e-info-soft); color: var(--e-info-text); }
+.dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+.dot-live { background: var(--e-primary); }
+.dot-off { background: var(--e-danger); }
+.dot-pending { background: var(--e-accent); }
+.addr { font-family: var(--e-mono); font-size: 12px; color: var(--e-text2); background: var(--e-surface2); padding: 3px 10px; border-radius: var(--e-radius-sm); display: inline-block; }
+
+/* Navigation */
+.nav { display: flex; gap: 2px; background: var(--e-surface2); border-radius: var(--e-radius); padding: 3px; }
+.nav-item { padding: 8px 18px; border-radius: 8px; font-size: 13px; font-weight: 500; color: var(--e-text2); cursor: pointer; transition: all .15s; }
+.nav-item:hover { color: var(--e-text); }
+.nav-item.active { background: var(--e-surface); color: var(--e-text); box-shadow: var(--e-card-shadow); }
+
+/* Form inputs */
+.field label { display: block; font-size: 12px; font-weight: 600; color: var(--e-text2); margin-bottom: 5px; }
+.field input, .field select { width: 100%; padding: 9px 14px; border-radius: 8px; border: 1px solid var(--e-border2); background: var(--e-surface); color: var(--e-text); font-size: 13px; font-family: var(--e-mono); outline: none; transition: border .15s; }
+.field input:focus, .field select:focus { border-color: var(--e-primary); box-shadow: 0 0 0 3px rgba(16,185,129,0.1); }
+
+/* Table */
+.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tbl th { text-align: left; padding: 12px 14px; font-weight: 600; font-size: 11px; color: var(--e-text3); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid var(--e-border); }
+.tbl td { padding: 12px 14px; border-bottom: 1px solid var(--e-border); }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl tr:hover td { background: var(--e-surface2); }
+.tbl .mono { font-family: var(--e-mono); font-size: 12px; color: var(--e-text2); }
+
+/* Mockup card */
+.mockup-card { background: var(--e-surface); border: 1px solid var(--e-border); border-radius: var(--e-radius-lg); overflow: hidden; box-shadow: var(--e-card-shadow); }
+.mockup-hdr { padding: 16px 22px; border-bottom: 1px solid var(--e-border); display: flex; align-items: center; justify-content: space-between; }
+.mockup-body { padding: 22px; }
+
+/* Timeline */
+.timeline { display: flex; gap: 0; align-items: flex-start; margin: 16px 0; }
+.tl-step { flex: 1; text-align: center; position: relative; }
+.tl-dot { width: 30px; height: 30px; border-radius: 50%; margin: 0 auto 8px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #fff; }
+.tl-dot.done { background: var(--e-primary); }
+.tl-dot.active { background: var(--e-accent); animation: pulse 2s infinite; }
+.tl-dot.wait { background: var(--e-surface3); color: var(--e-text3); }
+.tl-label { font-size: 12px; color: var(--e-text2); font-weight: 500; }
+.tl-sub { font-size: 11px; color: var(--e-text3); margin-top: 2px; }
+.tl-line { position: absolute; top: 15px; left: calc(50% + 16px); right: calc(-50% + 16px); height: 2px; background: var(--e-surface3); }
+.tl-line.done { background: var(--e-primary); }
+@keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(245,158,11,.35); } 50% { box-shadow: 0 0 0 8px rgba(245,158,11,0); } }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+.grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px; }
+
+/* Sidebar nav mockup */
+.sidebar-nav { list-style: none; }
+.sidebar-nav li { padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 500; color: var(--e-text2); cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all .12s; margin-bottom: 2px; }
+.sidebar-nav li:hover { background: var(--e-surface2); color: var(--e-text); }
+.sidebar-nav li.active { background: var(--e-primary-soft); color: var(--e-primary-text); }
+.sidebar-nav li .icon { width: 18px; text-align: center; font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="wrap" id="root">
+
+<!-- Header -->
+<div class="hdr">
+  <div class="hdr-left">
+    <div class="logo">E</div>
+    <h1>EDMA <span>design system v1</span></h1>
+  </div>
+  <div class="tog" onclick="document.getElementById('root').classList.toggle('dark')">
+    <span>Light</span>
+    <div class="tog-track"><div class="tog-knob"></div></div>
+    <span>Dark</span>
+  </div>
+</div>
+
+<!-- COLORS -->
+<p class="sec">Color palette &mdash; primary + accent</p>
+<div class="row">
+  <div class="sw" style="background:#10B981;color:#fff;border:none">Primary<span>#10B981</span></div>
+  <div class="sw" style="background:#059669;color:#fff;border:none">Deep<span>#059669</span></div>
+  <div class="sw" style="background:#047857;color:#fff;border:none">Darker<span>#047857</span></div>
+  <div class="sw" style="background:#ECFDF5;color:#065F46">Soft<span>#ECFDF5</span></div>
+  <div class="sw" style="background:#F59E0B;color:#fff;border:none">Accent<span>#F59E0B</span></div>
+  <div class="sw" style="background:#FFFBEB;color:#92400E">Warm<span>#FFFBEB</span></div>
+</div>
+
+<p class="sec">Neutrals</p>
+<div class="row">
+  <div class="sw" style="background:#0B0F1A;color:#F9FAFB;border:none">900<span>#0B0F1A</span></div>
+  <div class="sw" style="background:#111827;color:#F9FAFB;border:none">800<span>#111827</span></div>
+  <div class="sw" style="background:#1F2937;color:#D1D5DB;border:none">700<span>#1F2937</span></div>
+  <div class="sw" style="background:#4B5563;color:#fff;border:none">500<span>#4B5563</span></div>
+  <div class="sw" style="background:#9CA3AF;color:#fff;border:none">400<span>#9CA3AF</span></div>
+  <div class="sw" style="background:#E5E7EB;color:#374151">200<span>#E5E7EB</span></div>
+  <div class="sw" style="background:#F3F4F6;color:#374151">100<span>#F3F4F6</span></div>
+  <div class="sw" style="background:#FAFBFC;color:#374151">50<span>#FAFBFC</span></div>
+</div>
+
+<p class="sec">Semantic</p>
+<div class="row">
+  <div class="sw" style="background:#3B82F6;color:#fff;border:none">Info<span>#3B82F6</span></div>
+  <div class="sw" style="background:#EF4444;color:#fff;border:none">Danger<span>#EF4444</span></div>
+  <div class="sw" style="background:#F59E0B;color:#fff;border:none">Warning<span>#F59E0B</span></div>
+  <div class="sw" style="background:#10B981;color:#fff;border:none">Success<span>#10B981</span></div>
+</div>
+
+<div class="sep"></div>
+
+<!-- TYPOGRAPHY -->
+<p class="sec">Typography</p>
+<div class="tr">
+  <div style="font-size:28px;font-weight:800;letter-spacing:-.5px">Settlement controller</div>
+  <div class="cap">Display / Inter 28px / 800 / -0.5 tracking</div>
+</div>
+<div class="tr">
+  <div style="font-size:20px;font-weight:600">Milestone verified</div>
+  <div class="cap">Heading / 20px / 600</div>
+</div>
+<div class="tr">
+  <div style="font-size:15px;line-height:1.65;color:var(--e-text)">Escrow must be fully funded before shipping begins. Only cryptographic verification unlocks funds. Nothing mints, nothing settles, nothing moves until proof is on-chain.</div>
+  <div class="cap">Body / 15px / 400 / 1.65 line-height</div>
+</div>
+<div class="tr">
+  <div style="font-size:13px;color:var(--e-text2)">Transaction submitted 2 blocks ago &middot; Block #2,847,103</div>
+  <div class="cap">Caption / 13px / secondary</div>
+</div>
+<div class="tr">
+  <div style="font-family:var(--e-mono);font-size:13px;color:var(--e-text2)">0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0</div>
+  <div class="cap">Monospace / JetBrains Mono 13px / addresses, hashes, code</div>
+</div>
+
+<div class="sep"></div>
+
+<!-- METRICS -->
+<p class="sec">Metric cards</p>
+<div class="row">
+  <div class="metric"><div class="label">Total value locked</div><div class="val">$4.2M</div><div class="sub">+12.4% this week</div></div>
+  <div class="metric"><div class="label">Active deals</div><div class="val">847</div><div class="sub">23 settling today</div></div>
+  <div class="metric"><div class="label">EDM burned</div><div class="val">1.8M</div><div class="sub">Supply: 498.2M</div></div>
+  <div class="metric"><div class="label">Block height</div><div class="val" style="font-family:var(--e-mono)">2,847,103</div><div class="sub"><span class="dot dot-live"></span> 2s blocks</div></div>
+</div>
+
+<div class="sep"></div>
+
+<!-- BUTTONS -->
+<p class="sec">Buttons</p>
+<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px">
+  <button class="btn btn-primary">Submit claim</button>
+  <button class="btn btn-primary btn-sm">Approve</button>
+  <button class="btn btn-outline">View details</button>
+  <button class="btn btn-outline btn-sm">Export CSV</button>
+  <button class="btn btn-ghost">Cancel</button>
+  <button class="btn btn-danger">Revoke attestor</button>
+</div>
+
+<!-- BADGES -->
+<p class="sec">Badges + status indicators</p>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+  <span class="badge badge-pass"><span class="dot dot-live"></span> Pass</span>
+  <span class="badge badge-fail"><span class="dot dot-off"></span> Fail</span>
+  <span class="badge badge-pending"><span class="dot dot-pending"></span> Pending</span>
+  <span class="badge badge-info">Milestone 3/5</span>
+  <span class="badge badge-pass">Active</span>
+  <span class="badge badge-fail">Revoked</span>
+  <span class="addr">0x9fE46736...fa6e0</span>
+  <span class="addr" style="color:var(--e-primary-text);background:var(--e-primary-soft)">Chain 741</span>
+</div>
+
+<div class="sep"></div>
+
+<!-- NAVIGATION -->
+<p class="sec">Navigation &mdash; tab bar</p>
+<div class="nav" style="margin-bottom:16px">
+  <div class="nav-item active" onclick="activateTab(this)">Overview</div>
+  <div class="nav-item" onclick="activateTab(this)">Deals</div>
+  <div class="nav-item" onclick="activateTab(this)">Settlement</div>
+  <div class="nav-item" onclick="activateTab(this)">Attestors</div>
+  <div class="nav-item" onclick="activateTab(this)">Assets</div>
+</div>
+
+<p class="sec">Navigation &mdash; sidebar</p>
+<div class="card" style="padding:12px;max-width:240px">
+  <ul class="sidebar-nav">
+    <li class="active"><span class="icon">&#9673;</span> Overview</li>
+    <li><span class="icon">&#9634;</span> Deal rooms</li>
+    <li><span class="icon">&#8853;</span> Settlement</li>
+    <li><span class="icon">&#9670;</span> PoV console</li>
+    <li><span class="icon">&#9733;</span> Attestors</li>
+    <li><span class="icon">&#9651;</span> Assets</li>
+    <li><span class="icon">&#9881;</span> Settings</li>
+  </ul>
+</div>
+
+<div class="sep"></div>
+
+<!-- FORM INPUTS -->
+<p class="sec">Form inputs</p>
+<div style="display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;margin-bottom:16px">
+  <div class="field" style="flex:1;min-width:160px"><label>Order ID</label><input placeholder="0x..." /></div>
+  <div class="field" style="flex:1;min-width:140px"><label>Milestone</label><select><option>ON_BOARD</option><option>CUSTOMS</option><option>ARRIVAL_QA</option><option>DELIVERY</option></select></div>
+  <div class="field" style="flex:1;min-width:120px"><label>Amount (EDSD)</label><input type="number" placeholder="10000" /></div>
+  <button class="btn btn-primary" style="height:38px">Fund escrow</button>
+</div>
+
+<div class="sep"></div>
+
+<!-- DATA TABLE -->
+<p class="sec">Data table</p>
+<div class="card" style="padding:0;overflow:hidden">
+<table class="tbl">
+<thead><tr><th>Order</th><th>Milestone</th><th>Supplier</th><th>Amount</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td class="mono">ORD-2847</td><td>Customs clearance</td><td class="mono">0x70997...79C8</td><td style="font-weight:600">$24,500</td><td><span class="badge badge-pass"><span class="dot dot-live"></span> Pass</span></td></tr>
+<tr><td class="mono">ORD-2846</td><td>Arrival QA</td><td class="mono">0x3C44C...93BC</td><td style="font-weight:600">$18,200</td><td><span class="badge badge-pending"><span class="dot dot-pending"></span> Pending</span></td></tr>
+<tr><td class="mono">ORD-2845</td><td>On-board inspection</td><td class="mono">0xf39Fd...2266</td><td style="font-weight:600">$31,000</td><td><span class="badge badge-fail"><span class="dot dot-off"></span> Fail</span></td></tr>
+<tr><td class="mono">ORD-2844</td><td>Final delivery</td><td class="mono">0x70997...79C8</td><td style="font-weight:600">$42,750</td><td><span class="badge badge-pass"><span class="dot dot-live"></span> Pass</span></td></tr>
+<tr><td class="mono">ORD-2843</td><td>Customs clearance</td><td class="mono">0x3C44C...93BC</td><td style="font-weight:600">$15,900</td><td><span class="badge badge-pass"><span class="dot dot-live"></span> Pass</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="sep"></div>
+
+<!-- MILESTONE SETTLEMENT MOCKUP -->
+<p class="sec">Mockup &mdash; milestone settlement</p>
+<div class="mockup-card">
+  <div class="mockup-hdr">
+    <div>
+      <span style="font-weight:700;font-size:16px">ORD-2847</span>
+      <span style="color:var(--e-text3);font-size:13px;margin-left:10px">Solar panel shipment &mdash; Shanghai to Rotterdam</span>
+    </div>
+    <span class="badge badge-pending"><span class="dot dot-pending"></span> In progress</span>
+  </div>
+  <div class="mockup-body">
+    <div style="display:flex;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px">
+      <div><span style="font-size:12px;color:var(--e-text3)">Total value</span><div style="font-size:22px;font-weight:700">$124,500</div></div>
+      <div style="text-align:right"><span style="font-size:12px;color:var(--e-text3)">Corridor</span><div class="addr" style="margin-top:4px">CN-NL-SOLAR-01</div></div>
+      <div style="text-align:right"><span style="font-size:12px;color:var(--e-text3)">Supplier</span><div class="addr" style="margin-top:4px">0x70997970C518...79C8</div></div>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-step"><div class="tl-line done"></div><div class="tl-dot done">1</div><div class="tl-label">On-board</div><div class="tl-sub">$24,900 &middot; Paid</div></div>
+      <div class="tl-step"><div class="tl-line done"></div><div class="tl-dot done">2</div><div class="tl-label">Customs</div><div class="tl-sub">$24,900 &middot; Paid</div></div>
+      <div class="tl-step"><div class="tl-line"></div><div class="tl-dot active">3</div><div class="tl-label">Arrival QA</div><div class="tl-sub">$37,350 &middot; Awaiting proof</div></div>
+      <div class="tl-step"><div class="tl-dot wait">4</div><div class="tl-label">Delivery</div><div class="tl-sub">$37,350 &middot; Locked</div></div>
+    </div>
+
+    <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap">
+      <div class="metric" style="flex:1"><div class="label">Locked (EDSD)</div><div class="val" style="font-size:18px">$74,700</div></div>
+      <div class="metric" style="flex:1"><div class="label">Released</div><div class="val" style="font-size:18px;color:var(--e-primary)">$49,800</div></div>
+      <div class="metric" style="flex:1"><div class="label">Platform fee</div><div class="val" style="font-size:18px">$597</div></div>
+      <div class="metric" style="flex:1"><div class="label">EDM burned</div><div class="val" style="font-size:18px;color:var(--e-accent)">298</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="sep"></div>
+
+<!-- ATTESTOR CARD -->
+<p class="sec">Mockup &mdash; attestor card</p>
+<div class="card" style="display:flex;gap:18px;align-items:flex-start">
+  <div style="width:48px;height:48px;border-radius:50%;background:var(--e-primary-soft);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;color:var(--e-primary-text);flex-shrink:0">QA</div>
+  <div style="flex:1;min-width:0">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap">
+      <span style="font-weight:700;font-size:16px">SGS Testing Lab</span>
+      <span class="badge badge-pass"><span class="dot dot-live"></span> Active</span>
+      <span class="badge badge-info">QA_LAB</span>
+      <span class="badge badge-info">CUSTOMS</span>
+    </div>
+    <div style="font-size:13px;color:var(--e-text3);margin-bottom:14px">Org: SGS SA &middot; LEI: 549300... &middot; Registered Mar 2026</div>
+    <div class="grid-4">
+      <div><div style="font-size:11px;color:var(--e-text3)">Pass rate</div><div style="font-weight:700;font-size:16px">98.2%</div></div>
+      <div><div style="font-size:11px;color:var(--e-text3)">Avg latency</div><div style="font-weight:700;font-size:16px">340ms</div></div>
+      <div><div style="font-size:11px;color:var(--e-text3)">Reversals</div><div style="font-weight:700;font-size:16px">0.4%</div></div>
+      <div><div style="font-size:11px;color:var(--e-text3)">Bond staked</div><div style="font-weight:700;font-size:16px">5,000 EDM</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="sep"></div>
+
+<!-- DESIGN PRINCIPLES -->
+<p class="sec">Design principles</p>
+<div class="grid-2" style="margin-bottom:16px">
+  <div class="card"><div style="font-weight:700;font-size:15px;margin-bottom:6px">Clarity first</div><div style="font-size:13px;color:var(--e-text2);line-height:1.6">Every screen answers one question. Data density without visual overload. White space is a feature, not waste.</div></div>
+  <div class="card"><div style="font-weight:700;font-size:15px;margin-bottom:6px">Trust through transparency</div><div style="font-size:13px;color:var(--e-text2);line-height:1.6">On-chain data is always one click away. Every number links to its source transaction. Verifiable by default.</div></div>
+  <div class="card"><div style="font-weight:700;font-size:15px;margin-bottom:6px">Progressive disclosure</div><div style="font-size:13px;color:var(--e-text2);line-height:1.6">Summary first, detail on demand. Metrics at the top, raw data below. Never overwhelm a new user.</div></div>
+  <div class="card"><div style="font-weight:700;font-size:15px;margin-bottom:6px">Consistent language</div><div style="font-size:13px;color:var(--e-text2);line-height:1.6">Same component, same interaction, everywhere. Modular and composable across explorer, bridge, deal room.</div></div>
+</div>
+
+</div>
+
+<script>
+function activateTab(el) {
+  el.parentElement.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+  el.classList.add('active');
+}
+document.querySelectorAll('.sidebar-nav li').forEach(li => {
+  li.onclick = function() {
+    this.parentElement.querySelectorAll('li').forEach(l => l.classList.remove('active'));
+    this.classList.add('active');
+  };
+});
+</script>
+</body>
+</html>
