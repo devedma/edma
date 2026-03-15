@@ -7,14 +7,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html[data-theme="light"]{--e-navy:#050443;--e-navy-80:#1E1D5C;--e-navy-60:#3A3978;--e-navy-40:#6968A1;--e-navy-20:#B4B3D0;--e-navy-10:#D9D9E7;--e-navy-05:#EDEDF4;--e-amber:#F5A410;--e-amber-hover:#E09309;--e-amber-soft:#FEF4E1;--e-amber-text:#8B5A00;--e-bg:#FFFFFF;--e-bg-page:#F6F6FA;--e-surface:#FFFFFF;--e-surface-raised:#FFFFFF;--e-surface-sunken:#F0F0F6;--e-border:#E2E2EC;--e-border-strong:#CDCDD9;--e-text:#050443;--e-text-secondary:#3A3978;--e-text-muted:#8887AD;--e-success:#10B981;--e-success-soft:#E8FAF3;--e-success-text:#065F46;--e-danger:#EF4444;--e-danger-soft:#FEF2F2;--e-danger-text:#991B1B;--e-info:#3B82F6;--e-info-soft:#EFF6FF;--e-info-text:#1E40AF;--e-warning:#F59E0B;--e-warning-soft:#FFFBEB;--e-warning-text:#92400E;--e-input-bg:#FFFFFF;--e-input-border:#CDCDD9;--e-input-border-focus:#050443;--e-input-placeholder:#8887AD;--e-card-shadow:0 1px 3px rgba(5,4,67,0.06);--e-card-shadow-hover:0 4px 16px rgba(5,4,67,0.1);--e-focus-ring:0 0 0 3px rgba(5,4,67,0.12)}
-html[data-theme="dark"]{--e-navy:#FFFFFF;--e-navy-80:#D5D4E6;--e-navy-60:#A8A7C8;--e-navy-40:#706FA0;--e-navy-20:#363466;--e-navy-10:#201F55;--e-navy-05:#0C0B3A;--e-amber:#F5A410;--e-amber-hover:#F7B840;--e-amber-soft:rgba(245,164,16,0.15);--e-amber-text:#F5C96A;--e-bg:#0F1115;--e-bg-page:#0F1115;--e-surface:#161A22;--e-surface-raised:#1C2129;--e-surface-sunken:#12151B;--e-border:#1E2330;--e-border-strong:#2A303D;--e-text:#FFFFFF;--e-text-secondary:#B0B8C9;--e-text-muted:#6B7486;--e-success:#3EDBA1;--e-success-soft:rgba(62,219,161,0.15);--e-success-text:#7AEDC5;--e-danger:#F87171;--e-danger-soft:rgba(248,113,113,0.15);--e-danger-text:#FCA5A5;--e-info:#6EB1FF;--e-info-soft:rgba(110,177,255,0.15);--e-info-text:#A3CEFF;--e-warning:#FBC34E;--e-warning-soft:rgba(251,195,78,0.15);--e-warning-text:#FDE08A;--e-input-bg:#12151B;--e-input-border:#2A303D;--e-input-border-focus:#F5A410;--e-input-placeholder:#6B7486;--e-card-shadow:0 2px 8px rgba(0,0,0,0.4);--e-card-shadow-hover:0 8px 24px rgba(0,0,0,0.5);--e-focus-ring:0 0 0 3px rgba(245,164,16,0.3)}
-body{font-family:'Inter',sans-serif;font-size:14px;line-height:1.6;background:var(--e-bg-page);color:var(--e-text);-webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
+html,body{margin:0;padding:0;min-height:100vh}
+/* Variables on both html AND .app-root so embedded viewers work */
+html[data-theme="light"],.app-root[data-theme="light"]{--e-navy:#050443;--e-navy-80:#1E1D5C;--e-navy-60:#3A3978;--e-navy-40:#6968A1;--e-navy-20:#B4B3D0;--e-navy-10:#D9D9E7;--e-navy-05:#EDEDF4;--e-amber:#F5A410;--e-amber-hover:#E09309;--e-amber-soft:#FEF4E1;--e-amber-text:#8B5A00;--e-bg:#FFFFFF;--e-bg-page:#F6F6FA;--e-surface:#FFFFFF;--e-surface-raised:#FFFFFF;--e-surface-sunken:#F0F0F6;--e-border:#E2E2EC;--e-border-strong:#CDCDD9;--e-text:#050443;--e-text-secondary:#3A3978;--e-text-muted:#8887AD;--e-success:#10B981;--e-success-soft:#E8FAF3;--e-success-text:#065F46;--e-danger:#EF4444;--e-danger-soft:#FEF2F2;--e-danger-text:#991B1B;--e-info:#3B82F6;--e-info-soft:#EFF6FF;--e-info-text:#1E40AF;--e-warning:#F59E0B;--e-warning-soft:#FFFBEB;--e-warning-text:#92400E;--e-input-bg:#FFFFFF;--e-input-border:#CDCDD9;--e-input-border-focus:#050443;--e-input-placeholder:#8887AD;--e-card-shadow:0 1px 3px rgba(5,4,67,0.06);--e-card-shadow-hover:0 4px 16px rgba(5,4,67,0.1);--e-focus-ring:0 0 0 3px rgba(5,4,67,0.12)}
+html[data-theme="dark"],.app-root[data-theme="dark"]{--e-navy:#FFFFFF;--e-navy-80:#D5D4E6;--e-navy-60:#A8A7C8;--e-navy-40:#706FA0;--e-navy-20:#363466;--e-navy-10:#201F55;--e-navy-05:#0C0B3A;--e-amber:#F5A410;--e-amber-hover:#F7B840;--e-amber-soft:rgba(245,164,16,0.15);--e-amber-text:#F5C96A;--e-bg:#0F1115;--e-bg-page:#0F1115;--e-surface:#161A22;--e-surface-raised:#1C2129;--e-surface-sunken:#12151B;--e-border:#1E2330;--e-border-strong:#2A303D;--e-text:#FFFFFF;--e-text-secondary:#B0B8C9;--e-text-muted:#6B7486;--e-success:#3EDBA1;--e-success-soft:rgba(62,219,161,0.15);--e-success-text:#7AEDC5;--e-danger:#F87171;--e-danger-soft:rgba(248,113,113,0.15);--e-danger-text:#FCA5A5;--e-info:#6EB1FF;--e-info-soft:rgba(110,177,255,0.15);--e-info-text:#A3CEFF;--e-warning:#FBC34E;--e-warning-soft:rgba(251,195,78,0.15);--e-warning-text:#FDE08A;--e-input-bg:#12151B;--e-input-border:#2A303D;--e-input-border-focus:#F5A410;--e-input-placeholder:#6B7486;--e-card-shadow:0 2px 8px rgba(0,0,0,0.4);--e-card-shadow-hover:0 8px 24px rgba(0,0,0,0.5);--e-focus-ring:0 0 0 3px rgba(245,164,16,0.3)}
+body{font-family:'Inter',sans-serif;font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.app-root{background:var(--e-bg-page);color:var(--e-text);min-height:100vh;transition:background .3s,color .3s}
 .topnav{background:var(--e-surface);border-bottom:1px solid var(--e-border);padding:0 24px;display:flex;align-items:center;height:56px;gap:24px;position:sticky;top:0;z-index:100}
 .topnav-logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px}
 .topnav-logo .mark{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px}
-html[data-theme="light"] .mark{background:#050443;color:#F5A410}
-html[data-theme="dark"] .mark{background:#F5A410;color:#050443}
+html[data-theme="light"] .mark,.app-root[data-theme="light"] .mark{background:#050443;color:#F5A410}
+html[data-theme="dark"] .mark,.app-root[data-theme="dark"] .mark{background:#F5A410;color:#050443}
 .topnav-links{display:flex;gap:4px}
 .topnav-links a{padding:6px 14px;border-radius:8px;font-size:13px;font-weight:500;color:var(--e-text-muted);text-decoration:none;transition:all .12s}
 .topnav-links a:hover{color:var(--e-text);background:var(--e-surface-sunken)}
@@ -24,10 +27,10 @@ html[data-theme="dark"] .mark{background:#F5A410;color:#050443}
 .topnav-search::placeholder{color:var(--e-input-placeholder)}
 .topnav-search:focus{border-color:var(--e-input-border-focus);box-shadow:var(--e-focus-ring)}
 .tog-sm{width:40px;height:22px;border-radius:11px;position:relative;cursor:pointer;transition:background .3s}
-html[data-theme="light"] .tog-sm{background:var(--e-border-strong)}
-html[data-theme="dark"] .tog-sm{background:var(--e-amber)}
+html[data-theme="light"] .tog-sm,.app-root[data-theme="light"] .tog-sm{background:var(--e-border-strong)}
+html[data-theme="dark"] .tog-sm,.app-root[data-theme="dark"] .tog-sm{background:var(--e-amber)}
 .tog-sm-knob{width:16px;height:16px;border-radius:50%;background:#fff;position:absolute;top:3px;left:3px;transition:transform .3s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
-html[data-theme="dark"] .tog-sm-knob{transform:translateX(18px)}
+html[data-theme="dark"] .tog-sm-knob,.app-root[data-theme="dark"] .tog-sm-knob{transform:translateX(18px)}
 .wrap{max-width:1200px;margin:0 auto;padding:24px}
 .stats-bar{display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap}
 .stat{background:var(--e-surface);border:1px solid var(--e-border);border-radius:12px;padding:14px 18px;flex:1;min-width:140px;box-shadow:var(--e-card-shadow)}
@@ -92,6 +95,7 @@ html[data-theme="dark"] .tog-sm-knob{transform:translateX(18px)}
 </style>
 </head>
 <body>
+<div class="app-root" id="app-root" data-theme="light">
 <div class="topnav">
   <div class="topnav-logo"><div class="mark">E</div><span>EDMA Explorer</span></div>
   <button class="topnav-burger" onclick="document.getElementById('mm').classList.toggle('open')"><span></span><span></span><span></span></button>
@@ -104,7 +108,7 @@ html[data-theme="dark"] .tog-sm-knob{transform:translateX(18px)}
   </div>
   <div class="topnav-right">
     <input class="topnav-search" placeholder="Search by address, tx hash, block..." />
-    <div class="tog-sm" onclick="var h=document.documentElement;h.setAttribute('data-theme',h.getAttribute('data-theme')==='dark'?'light':'dark')"><div class="tog-sm-knob"></div></div>
+    <div class="tog-sm" onclick="var t=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',t);document.getElementById('app-root').setAttribute('data-theme',t)"><div class="tog-sm-knob"></div></div>
   </div>
 </div>
 <div class="mobile-menu" id="mm">
@@ -190,5 +194,6 @@ html[data-theme="dark"] .tog-sm-knob{transform:translateX(18px)}
 <script>
 function sv(id,el){document.querySelectorAll('.wrap').forEach(function(v){v.classList.add('hide')});document.getElementById('view-'+id).classList.remove('hide');if(el){document.querySelectorAll('.topnav-links a').forEach(function(a){a.classList.remove('active')});el.classList.add('active')}window.scrollTo(0,0)}
 </script>
+</div><!-- /app-root -->
 </body>
 </html>
