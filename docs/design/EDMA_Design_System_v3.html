@@ -69,38 +69,38 @@
 
 /* ═══ DARK THEME ═══ */
 [data-theme="dark"] {
-  /* Navy scale — all derived from #050443 */
-  --e-navy: #E8E7F4;
-  --e-navy-80: #C8C7E0;
-  --e-navy-60: #9B99C4;
-  --e-navy-40: #6E6CA6;
-  --e-navy-20: #3A3878;
-  --e-navy-10: #1E1C5C;
-  --e-navy-05: #0D0B50;
+  /* Navy scale — desaturated tints of #050443, same hue family */
+  --e-navy: #F0EFF8;
+  --e-navy-80: #D5D4E6;
+  --e-navy-60: #A8A7C8;
+  --e-navy-40: #706FA0;
+  --e-navy-20: #363466;
+  --e-navy-10: #201F50;
+  --e-navy-05: #0C0B3A;
 
-  /* Amber — same identity, slightly lifted for dark bg contrast */
+  /* Amber — exact brand amber as accent */
   --e-amber: #F5A410;
   --e-amber-hover: #F7B840;
   --e-amber-soft: rgba(245,164,16,0.15);
   --e-amber-text: #F5C96A;
 
-  /* Surfaces — all shades of #050443, darkest to lightest */
-  --e-bg: #030228;
-  --e-bg-page: #020118;
+  /* Surfaces — tight hierarchy from #050443, same hue */
+  --e-bg: #040335;
+  --e-bg-page: #02011E;
   --e-surface: #050443;
-  --e-surface-raised: #0C0A58;
-  --e-surface-sunken: #030230;
+  --e-surface-raised: #0C0B4E;
+  --e-surface-sunken: #040338;
 
-  /* Borders — lighter shades of #050443 for visibility */
-  --e-border: #1A1870;
-  --e-border-strong: #2D2A88;
+  /* Borders — muted, desaturated navy. NOT vivid blue */
+  --e-border: #201F55;
+  --e-border-strong: #302E65;
 
-  /* Text — all light enough to read on #050443 surfaces */
-  --e-text: #F2F1FA;
-  --e-text-secondary: #C8C7E0;
-  --e-text-muted: #9B99C4;
+  /* Text — bright white for full readability on #050443 */
+  --e-text: #FFFFFF;
+  --e-text-secondary: #D5D4E6;
+  --e-text-muted: #A8A7C8;
 
-  /* Semantic — bright enough on dark navy */
+  /* Semantic — bright on dark navy */
   --e-success: #3EDBA1;
   --e-success-soft: rgba(62,219,161,0.15);
   --e-success-text: #7AEDC5;
@@ -115,14 +115,14 @@
   --e-warning-text: #FDE08A;
 
   /* Inputs */
-  --e-input-bg: #030230;
-  --e-input-border: #2D2A88;
+  --e-input-bg: #040338;
+  --e-input-border: #302E65;
   --e-input-border-focus: #F5A410;
-  --e-input-placeholder: #6E6CA6;
+  --e-input-placeholder: #706FA0;
 
   /* Effects */
-  --e-card-shadow: 0 2px 6px rgba(2,1,24,0.5), 0 0 0 1px rgba(245,164,16,0.04);
-  --e-card-shadow-hover: 0 8px 24px rgba(2,1,24,0.6);
+  --e-card-shadow: 0 2px 8px rgba(2,1,30,0.6);
+  --e-card-shadow-hover: 0 8px 24px rgba(2,1,30,0.7);
   --e-focus-ring: 0 0 0 3px rgba(245,164,16,0.3);
 
   color-scheme: dark;
