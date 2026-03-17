@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <!-- Background circle -->
+  <circle cx="24" cy="24" r="22" fill="#F5A410"/>
+  <!-- Navy E mark -->
+  <path d="M14 13h20v4.5H19.5v5H30v4.5H19.5v5H34V36.5H14z" fill="#050443"/>
+</svg>

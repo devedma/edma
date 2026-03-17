@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 48" width="200" height="48">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&amp;display=swap');
+    </style>
+  </defs>
+  <!-- Amber accent bar -->
+  <rect x="0" y="4" width="4" height="40" rx="2" fill="#F5A410"/>
+  <!-- EDMA wordmark -->
+  <text x="14" y="36" font-family="Inter, system-ui, -apple-system, sans-serif" font-weight="700" font-size="32" fill="#050443" letter-spacing="-0.5">EDMA</text>
+  <!-- L2 badge -->
+  <rect x="140" y="12" width="30" height="20" rx="4" fill="#050443"/>
+  <text x="155" y="27" font-family="Inter, system-ui, -apple-system, sans-serif" font-weight="700" font-size="12" fill="#FFFFFF" text-anchor="middle">L2</text>
+</svg>
