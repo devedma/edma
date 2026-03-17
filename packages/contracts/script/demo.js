@@ -225,9 +225,61 @@ async function main() {
     signature: signature,
   };
 
-  // 4c. Execute atomic evaluate + settle
-  console.log("\n  Step 2: Atomic evaluateClaim → settleTrancheOnPass...");
-  console.log("    (single TX, same block, gate pass + OneClaim valid)");
+  // 4b2. Check OneClaim availability (might be consumed from earlier run)
+  let uniquenessKey = UNIQUENESS_KEY;
+  const isAvailable = await oneClaim.isAvailable(uniquenessKey);
+  if (!isAvailable) {
+    console.log("    ⚠ Original uniqueness key already consumed — using fresh key");
+    uniquenessKey = hre.ethers.id("DEMO-" + Date.now());
+  } else {
+    console.log("    ✓ Uniqueness key available");
+  }
+
+  // 4c. Pre-flight check (staticCall simulates the full flow without sending TX)
+  console.log("\n  Step 2: Pre-flight check (staticCall)...");
+  try {
+    const simResult = await settler.evaluateAndSettle.staticCall(
+      addresses.PoVGate,
+      addresses.SettlementController,
+      ORDER_ID,
+      MS_ONBOARD,
+      SCHEMA_ONBOARD,
+      POV_HASH,
+      [attestation],
+      uniquenessKey
+    );
+    console.log(`    ✓ Pre-flight PASS — receiptId: ${simResult.receiptId.slice(0, 18)}...`);
+  } catch (prefErr) {
+    console.error(`    ✗ Pre-flight FAILED: ${prefErr.reason || prefErr.message?.slice(0, 200)}`);
+    if (prefErr.data) console.error(`    Revert data: ${prefErr.data}`);
+    console.error("    Settlement would fail. Fix the error above first.");
+    process.exit(1);
+  }
+
+  // 4d. Estimate gas manually and add 50% buffer (OP Stack can underestimate)
+  console.log("\n  Step 3: Estimating gas...");
+  let gasEstimate;
+  try {
+    gasEstimate = await settler.evaluateAndSettle.estimateGas(
+      addresses.PoVGate,
+      addresses.SettlementController,
+      ORDER_ID,
+      MS_ONBOARD,
+      SCHEMA_ONBOARD,
+      POV_HASH,
+      [attestation],
+      uniquenessKey
+    );
+    console.log(`    Estimated: ${gasEstimate.toString()}`);
+  } catch (estErr) {
+    console.log(`    Estimate failed, using 3M default: ${estErr.message?.slice(0, 100)}`);
+    gasEstimate = 3000000n;
+  }
+  const gasLimit = gasEstimate * 3n / 2n; // 50% buffer over estimate
+  console.log(`    Gas limit (with 50%% buffer): ${gasLimit.toString()}`);
+
+  // 4e. Execute atomic evaluate + settle (real transaction)
+  console.log("\n  Step 4: Sending settlement transaction...");
 
   const settleTx = await settler.evaluateAndSettle(
     addresses.PoVGate,
@@ -237,7 +289,8 @@ async function main() {
     SCHEMA_ONBOARD,
     POV_HASH,
     [attestation],
-    UNIQUENESS_KEY
+    uniquenessKey,
+    { gasLimit }
   );
 
   const settleReceipt = await settleTx.wait();
@@ -298,7 +351,7 @@ async function main() {
   console.log(`  EDSD unlocked for ON_BOARD:  ${unlocked ? "✓ YES" : "✗ NO"}`);
 
   // 5b. OneClaim finalized?
-  const available = await oneClaim.isAvailable(UNIQUENESS_KEY);
+  const available = await oneClaim.isAvailable(uniquenessKey);
   console.log(`  OneClaim available:          ${available ? "✗ STILL AVAILABLE (BAD)" : "✓ FINALIZED"}`);
 
   // 5c. EDSD balances
